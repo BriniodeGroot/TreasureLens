@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import Header from './Header';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -20,7 +21,6 @@ import {
 import {
   Colors,
   DebugInstructions,
-  Header,
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
@@ -71,14 +71,13 @@ function App(): JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
+        <Header title="TreasureLens" />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
+          <Section title="Welkom!">
+            De beste Treasure game ooit!
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
