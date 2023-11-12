@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import styles from '../style';
 
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -17,17 +18,5 @@ const HomeScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-});
 
 export default HomeScreen;

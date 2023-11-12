@@ -1,6 +1,7 @@
 // SecondScreen.tsx
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import styles from '../style';
 
 const SecondScreen: React.FC = () => {
   return (
@@ -9,17 +10,6 @@ const SecondScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 20,
-  },
-});
 
 export default SecondScreen;
 
