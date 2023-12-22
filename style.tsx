@@ -41,10 +41,13 @@ type Styles = {
 // Create the stylesheet
 const styles: Styles = StyleSheet.create({
   container: {
+    width: '100%',
+    height: '100%',
     flex: 1,
     backgroundColor: colors.fullblack,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 30,
   },
   header: {
     width: '100%',
@@ -66,14 +69,14 @@ const styles: Styles = StyleSheet.create({
     padding: 20,
   },
   text: {
-    fontSize: 16, // Set the font size
+    fontSize: 20, // Set the font size
     color: colors.textPrimary, // Choose your color
     backgroundColor: '#f0f0f0', // Background color for the tag
-    paddingHorizontal: 10, // Horizontal padding
-    paddingVertical: 5, // Vertical padding
+    paddingHorizontal: 20, // Horizontal padding
+    paddingVertical: 10, // Vertical padding
     borderRadius: 15, // Rounded corners
     overflow: 'hidden', // Ensures the background does not bleed outside the border radius
-    margin: 5, // Margin around the tag
+    margin: 20, // Margin around the tag
     borderWidth: 1, // Border width
     //borderColor: '#4a90e2', // Border color
     textAlign: 'center', // Center the text
@@ -83,7 +86,7 @@ const styles: Styles = StyleSheet.create({
     backgroundColor: colors.lightgreen,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
@@ -91,7 +94,7 @@ const styles: Styles = StyleSheet.create({
   buttonText: {
     color: colors.textPrimary,
     fontFamily: fonts.bold,
-    fontSize: 16,
+    fontSize: 20,
   },
   input: {
     width: width - 40,
