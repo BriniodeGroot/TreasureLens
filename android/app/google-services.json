@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "806364031684",
+    "project_id": "treasurelens-eff7a",
+    "storage_bucket": "treasurelens-eff7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806364031684:android:ecaefb181f714db6993791",
+        "android_client_info": {
+          "package_name": "com.treasurelens"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYXbIjv-yL2Im1-3xci2RFhSUbUtOnnNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
