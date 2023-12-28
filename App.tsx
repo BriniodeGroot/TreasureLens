@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import SecondScreen from './screens/SecondScreen';
+import Chat from './screens/Chat';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,19 @@ function App() {
         <Stack.Screen 
           name="SecondScreen" 
           component={SecondScreen} 
+          options={{
+            headerStyle: {
+            backgroundColor: '#000000',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              },
+          }}
+          />
+        <Stack.Screen 
+          name="Chat" 
+          component={Chat} 
           options={{
             headerStyle: {
             backgroundColor: '#000000',

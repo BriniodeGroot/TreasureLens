@@ -20,6 +20,10 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('SecondScreen');
   };
 
+  const handleNavigateToChatScreen = () => {
+    navigation.navigate('Chat');
+  };
+
   return (
     
     <View style={styles.container}>
@@ -32,7 +36,7 @@ const HomeScreen: React.FC = () => {
       <TouchableOpacity onPress={handleNavigate} style={[styles.button, { marginTop: 175, marginBottom: 20 }]}>
         <Text style={styles.buttonText}>Start zelf een spel</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleNavigate} style={styles.button}>
+      <TouchableOpacity onPress={handleNavigateToChatScreen} style={styles.button}>
         <Text style={styles.buttonText}>Deel mee aan een spel</Text>
       </TouchableOpacity>
     </View>

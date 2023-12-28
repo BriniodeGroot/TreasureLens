@@ -35,6 +35,7 @@ type Styles = {
   input: any;
   text: any;
   headerStyle: any;
+  imagePreview: any;
   // Add more styles as needed
 };
 
@@ -108,6 +109,12 @@ const styles: Styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: colors.fullblack, // Example background color
+  },
+  imagePreview: {
+    width: 200,
+    height: 200,
+    marginTop: 10,
+    borderRadius: 10,
   },
   // Add more styles as per your app's design requirements
 });
