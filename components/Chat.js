@@ -4,15 +4,18 @@ import { View, Text, FlatList, TextInput, TouchableOpacity } from 'react-native'
 import database from '@react-native-firebase/database';
 import styles from '../style';
 import { getDatabase, ref, set, push, off, onValue } from "firebase/database";
+import { useAppContext } from '../AppContext';
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const { userData } = useAppContext();
 
   // Subscribe to the chat messages
   useEffect(() => {
     const db = getDatabase();
-    const chatRoomId = 'room1'; // Replace with your actual chat room ID
+    console.log(userData.code);
+    const chatRoomId = userData.code; // Replace with your actual chat room ID
     const chatRef = ref(db, `chatRooms/${chatRoomId}/messages`);
     
     const handleSnapshot = (snapshot) => {
@@ -39,7 +42,9 @@ const ChatComponent = () => {
   
     try {
       // Replace 'room1' with your actual chat room ID
-      const chatRoomId = 'room1';
+      const chatRoomId = userData.code;
+
+      console.log(chatRoomId);
 
       // Construct the message data
       const messageData = {

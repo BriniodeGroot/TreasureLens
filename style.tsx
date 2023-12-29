@@ -113,6 +113,7 @@ const styles: Styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 16,
     fontFamily: fonts.regular,
+    color: colors.fullblack,
   },
   headerStyle: {
     backgroundColor: colors.fullblack, // Example background color

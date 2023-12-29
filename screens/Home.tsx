@@ -16,12 +16,12 @@ const HomeScreen: React.FC = () => {
     });
   }, [navigation]);
 
-  const handleNavigate = () => {
-    navigation.navigate('SecondScreen');
+  const handleNavigateToGenerate = () => {
+    navigation.navigate('GenerateCode');
   };
 
   const handleNavigateToChatScreen = () => {
-    navigation.navigate('UploadImage');
+    navigation.navigate('EnterScreen');
   };
 
   return (
@@ -33,7 +33,7 @@ const HomeScreen: React.FC = () => {
       style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }}
       />
       <Text style={styles.text}>Welcome to TreasureLens! De leukste zoektocht om samen met familie en vrienden te doen.</Text>
-      <TouchableOpacity onPress={handleNavigate} style={[styles.button, { marginTop: 175, marginBottom: 20 }]}>
+      <TouchableOpacity onPress={handleNavigateToGenerate} style={[styles.button, { marginTop: 175, marginBottom: 20 }]}>
         <Text style={styles.buttonText}>Start zelf een spel</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleNavigateToChatScreen} style={styles.button}>
