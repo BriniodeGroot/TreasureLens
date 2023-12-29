@@ -4,7 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import SecondScreen from './screens/SecondScreen';
-import Chat from './screens/Chat';
+import UploadImage from './screens/UploadImage';
+import LiveChat from './screens/LiveChat';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,8 +40,21 @@ function App() {
           }}
           />
         <Stack.Screen 
-          name="Chat" 
-          component={Chat} 
+          name="UploadImage" 
+          component={UploadImage} 
+          options={{
+            headerStyle: {
+            backgroundColor: '#000000',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              },
+          }}
+          />
+        <Stack.Screen 
+          name="LiveChat" 
+          component={LiveChat} 
           options={{
             headerStyle: {
             backgroundColor: '#000000',

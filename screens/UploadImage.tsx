@@ -9,7 +9,7 @@ import styles from '../style';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {launchCamera} from 'react-native-image-picker';
 
-const ChatScreen: React.FC = () => {
+const UploadImageScreen: React.FC = () => {
     const navigation = useNavigation();
     const [imageUri, setImageUri] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -23,6 +23,10 @@ const ChatScreen: React.FC = () => {
     const handleNavigate = () => {
         navigation.navigate('Home');
     };
+
+    const handleNavigateToLiveChat = () => {
+      navigation.navigate('LiveChat');
+  };
 
     const selectImage = () => {
 
@@ -107,7 +111,7 @@ const ChatScreen: React.FC = () => {
     return (
         <View style={styles.container}>
             <Image source={require('../images/logo.jpg')} style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }} />
-            <Text style={styles.text}>Chat hier tijdens het spel!</Text>
+            <Text style={styles.text}>Upload hier je foto voor de opdracht</Text>
             {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}
             <TouchableOpacity onPress={selectImage} style={styles.button}>
                 <Text style={styles.buttonText}>Select Image</Text>
@@ -119,8 +123,11 @@ const ChatScreen: React.FC = () => {
             <TouchableOpacity onPress={handleNavigate} style={styles.button}>
                 <Text style={styles.buttonText}>Ga terug naar home</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={handleNavigateToLiveChat} style={styles.button}>
+                <Text style={styles.buttonText}>Ga naar live chat</Text>
+            </TouchableOpacity>
         </View>
     );
 };
 
-export default ChatScreen;
+export default UploadImageScreen;

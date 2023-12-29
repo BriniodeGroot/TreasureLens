@@ -4,9 +4,11 @@ import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-n
 import { useNavigation } from '@react-navigation/native';
 import styles from '../style';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
+import ChatComponent from '../components/Chat'; // Import your ChatComponent
 
 
-const HomeScreen: React.FC = () => {
+
+const LiveChat: React.FC = () => {
   const navigation = useNavigation();
   
   useLayoutEffect(() => {
@@ -16,11 +18,7 @@ const HomeScreen: React.FC = () => {
     });
   }, [navigation]);
 
-  const handleNavigate = () => {
-    navigation.navigate('SecondScreen');
-  };
-
-  const handleNavigateToChatScreen = () => {
+  const handleNavigateToUploadZone = () => {
     navigation.navigate('UploadImage');
   };
 
@@ -30,17 +28,15 @@ const HomeScreen: React.FC = () => {
       
       <Image
       source={require('../images/logo.jpg')}
-      style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }}
+      style={{ width: 100, height: 100, borderRadius: 10 }}
       />
-      <Text style={styles.text}>Welcome to TreasureLens! De leukste zoektocht om samen met familie en vrienden te doen.</Text>
-      <TouchableOpacity onPress={handleNavigate} style={[styles.button, { marginTop: 175, marginBottom: 20 }]}>
-        <Text style={styles.buttonText}>Start zelf een spel</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleNavigateToChatScreen} style={styles.button}>
-        <Text style={styles.buttonText}>Deel mee aan een spel</Text>
+      <Text style={styles.text}>Dit is de live chat tijdens de game.</Text>
+      <ChatComponent/>
+      <TouchableOpacity onPress={handleNavigateToUploadZone} style={styles.button}>
+        <Text style={styles.buttonText}>Ga terug naar de uploadzone!</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default HomeScreen;
+export default LiveChat;

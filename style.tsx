@@ -36,6 +36,13 @@ type Styles = {
   text: any;
   headerStyle: any;
   imagePreview: any;
+  chatContainer: any;
+  messageContainer: any;
+  messageText: any;
+  inputContainer: any;
+  inputChat: any;
+  sendButton: any;
+  sendButtonText: any;
   // Add more styles as needed
 };
 
@@ -116,6 +123,47 @@ const styles: Styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
   },
+  chatContainer: {
+    flex: 1,
+    backgroundColor: colors.textPrimary,
+  },
+  messageContainer: {
+    padding: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+  },
+  messageText: {
+    fontSize: 16,
+    colors: colors.textSecondary,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: colors.textPrimary,
+  },
+  inputChat: {
+    flex: 1,
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 8,
+    paddingHorizontal: '35%',
+    marginRight: 10,
+  },
+  sendButton: {
+    backgroundColor: colors.darkgreen,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  sendButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+  }
   // Add more styles as per your app's design requirements
 });
 
