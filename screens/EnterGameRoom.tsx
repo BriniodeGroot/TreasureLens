@@ -43,12 +43,14 @@ const EnterScreen: React.FC = () => {
       style={{ width: 100, height: 100, marginTop: 5, borderRadius: 10 }}
       />
       <Text style={styles.text}>Vul hier je username in en de code van de gameruimte om deel te nemen</Text>
+      <Text>Username:</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
+      <Text>Code:</Text>
       <TextInput
         style={styles.input}
         placeholder="Game Room Code"

@@ -48,7 +48,7 @@ const ChatComponent = () => {
 
       // Construct the message data
       const messageData = {
-        text: newMessage,
+        text: userData.username + ': ' + newMessage,
       };
 
       const timestamp = database.ServerValue.TIMESTAMP.toString();
