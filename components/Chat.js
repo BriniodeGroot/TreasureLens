@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TextInput, TouchableOpacity } from 'react-native';
 import database from '@react-native-firebase/database';
 import styles from '../style';
+import { getDatabase, ref, set, push } from "firebase/database";
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
@@ -32,29 +33,43 @@ const ChatComponent = () => {
     try {
       // Replace 'room1' with your actual chat room ID
       const chatRoomId = 'room1';
-  
+
       // Construct the message data
       const messageData = {
         text: newMessage,
       };
-  
-      // Specify the path to the chat messages for the given chat room
-      const chatPath = `chats/${chatRoomId}/messages`;
 
-      // Get a reference to the database at the specified path
-      const chatRef = database().ref(chatPath);
-      console.log(chatRef);
-        chatRef
-        .push(messageData)
-        .then(() => {
-            console.log('Message sent successfully');
-        })
-        .catch((error) => {
-            console.error('Error sending message:', error);
-        });
-      // Clear the input after sending the message
-      setNewMessage('');
-    } catch (error) {
+      const timestamp = database.ServerValue.TIMESTAMP.toString();
+
+      const db = getDatabase();
+      const newMessageRef = push(ref(db, 'chatRooms/' + chatRoomId + '/messages'));
+
+      // Set the message data under the unique key
+      set(newMessageRef, messageData);
+    }
+
+    // oude versie die niet werkte
+      
+    
+    //   // Specify the path to the chat messages for the given chat room
+    //   const chatPath = `chats/${chatRoomId}/messages`;
+
+    //   // Get a reference to the database at the specified path
+    //   const chatRef = database().ref(chatPath);
+    //   //chatRef.setValue(messageData);
+    //   console.log(chatRef);
+    //     chatRef
+    //     .push(messageData)
+    //     .then(() => {
+    //         console.log('Message sent successfully');
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error sending message:', error);
+    //     });
+    //   // Clear the input after sending the message
+    //   setNewMessage('');
+    // } 
+    catch (error) {
       console.error('Error preparing or sending message:', error);
     }
   };

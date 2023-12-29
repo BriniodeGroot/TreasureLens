@@ -128,6 +128,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     // Add other Firebase dependencies as needed
 
+    // Add the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-database")
+
      // Apply the Google Services plugin with the matching version
     //implementation 'com.google.gms:google-services:4.3.10' // Use the version compatible with Firebase BoM
 }
