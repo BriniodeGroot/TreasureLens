@@ -3,25 +3,32 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TextInput, TouchableOpacity } from 'react-native';
 import database from '@react-native-firebase/database';
 import styles from '../style';
-import { getDatabase, ref, set, push } from "firebase/database";
+import { getDatabase, ref, set, push, off, onValue } from "firebase/database";
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
+  // Subscribe to the chat messages
   useEffect(() => {
-    // Subscribe to the chat messages
-    const chatRef = database().ref('chats/default/messages');
-    const onValueChange = chatRef.on('value', (snapshot) => {
+    const db = getDatabase();
+    const chatRoomId = 'room1'; // Replace with your actual chat room ID
+    const chatRef = ref(db, `chatRooms/${chatRoomId}/messages`);
+    
+    const handleSnapshot = (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
         const messageArray = Object.values(data);
         setMessages(messageArray);
       }
-    });
+    };
+
+    const unsubscribe = onValue(chatRef, handleSnapshot);
 
     // Unsubscribe when the component unmounts
-    return () => chatRef.off('value', onValueChange);
+    return () => {
+      off(unsubscribe);
+    };
   }, []);
 
   const sendMessage = () => {
@@ -79,7 +86,7 @@ const ChatComponent = () => {
     <View style={styles.chatContainer}>
       <FlatList
         data={messages}
-        keyExtractor={(item) => item.timestamp.toString()}
+        //keyExtractor={(item) => item.timestamp.toString()}
         renderItem={({ item }) => (
           <View style={styles.messageContainer}>
             <Text style={styles.messageText}>{item.text}</Text>

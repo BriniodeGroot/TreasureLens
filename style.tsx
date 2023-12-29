@@ -136,7 +136,7 @@ const styles: Styles = StyleSheet.create({
   },
   messageText: {
     fontSize: 16,
-    colors: colors.textSecondary,
+    color: colors.fullblack,
   },
   inputContainer: {
     flexDirection: 'row',
