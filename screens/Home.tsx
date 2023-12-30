@@ -32,7 +32,7 @@ const HomeScreen: React.FC = () => {
       source={require('../images/logo.jpg')}
       style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }}
       />
-      <Text style={styles.text}>Welcome to TreasureLens! De leukste zoektocht om samen met familie en vrienden te doen.</Text>
+      <Text style={styles.text}>Welkom bij TreasureLens! De leukste zoektocht om samen met familie en vrienden te doen.</Text>
       <TouchableOpacity onPress={handleNavigateToGenerate} style={[styles.button, { marginTop: 175, marginBottom: 20 }]}>
         <Text style={styles.buttonText}>Start zelf een spel</Text>
       </TouchableOpacity>

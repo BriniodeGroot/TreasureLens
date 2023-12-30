@@ -14,7 +14,7 @@ const EnterScreen: React.FC = () => {
   const navigation = useNavigation();
   const [code, setCode] = useState('');
   const [username, setUsername] = useState('');
-  const { userData, storeCode, storeUsername } = useAppContext();
+  const { userData, storeCode, storeUsername, storeHost } = useAppContext();
   
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,6 +32,7 @@ const EnterScreen: React.FC = () => {
         console.log('Vul gegevens in');
     } else {
         navigation.navigate('UploadImage');
+        storeHost(false);
     }
 }
 

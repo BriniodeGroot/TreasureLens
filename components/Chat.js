@@ -46,9 +46,15 @@ const ChatComponent = () => {
 
       console.log(chatRoomId);
 
+      let host = '';
+
+      if (userData.host) {
+        host = '(host) ';
+      }
+
       // Construct the message data
       const messageData = {
-        text: userData.username + ': ' + newMessage,
+        text: host + userData.username + ': ' + newMessage,
       };
 
       const timestamp = database.ServerValue.TIMESTAMP.toString();

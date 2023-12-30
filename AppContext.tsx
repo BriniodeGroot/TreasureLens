@@ -4,12 +4,14 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface UserData {
   code: string | null;
   username: string | null;
+  host: boolean | null;
 }
 
 interface AppContextProps {
   userData: UserData;
   storeCode: (code: string) => void;
   storeUsername: (username: string) => void;
+  storeHost: (host: boolean) => void;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -22,6 +24,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [userData, setUserData] = useState<UserData>({
     code: null,
     username: null,
+    host: false,
   });
 
   const storeCode = (code: string) => {
@@ -32,8 +35,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setUserData((prevData) => ({ ...prevData, username }));
   };
 
+  const storeHost = (host: boolean) => {
+    setUserData((prevData) => ({ ...prevData, host }));
+  };
+
   return (
-    <AppContext.Provider value={{ userData, storeCode, storeUsername }}>
+    <AppContext.Provider value={{ userData, storeCode, storeUsername, storeHost }}>
       {children}
     </AppContext.Provider>
   );

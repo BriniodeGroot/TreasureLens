@@ -14,6 +14,7 @@ const colors = {
   lightgreen: '#71c993',
   darkgreen: '#325c42',
   fullblack: '#000000',
+  yellowLogo: '#fec671',
   // Add more colors as needed
 };
 
@@ -43,6 +44,7 @@ type Styles = {
   inputChat: any;
   sendButton: any;
   sendButtonText: any;
+  buttonSecondary: any;
   // Add more styles as needed
 };
 
@@ -92,6 +94,15 @@ const styles: Styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.lightgreen,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  buttonSecondary: {
+    backgroundColor: colors.yellowLogo,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 50,
