@@ -25,14 +25,25 @@ const EnterScreen: React.FC = () => {
 
   const enter = () => {
     console.log(code);
-    storeCode(code);
-    storeUsername(username);
+    
     if (code == '' || username == '') {
         ToastAndroid.show('Vul gegevens in', ToastAndroid.SHORT);
         console.log('Vul gegevens in');
     } else {
         navigation.navigate('UploadImage');
+        storeCode(code);
+        storeUsername(username);
         storeHost(false);
+
+        const messageData = {
+          name: username,
+          value: 0, 
+        };
+
+        const db = getDatabase();
+        const newMessageRef = push(ref(db, 'chatRooms/' + code + '/players'));
+
+        set(newMessageRef, messageData);
     }
 }
 

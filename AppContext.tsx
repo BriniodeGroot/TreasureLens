@@ -5,6 +5,7 @@ interface UserData {
   code: string | null;
   username: string | null;
   host: boolean | null;
+  lastTask: string | null;
 }
 
 interface AppContextProps {
@@ -12,6 +13,7 @@ interface AppContextProps {
   storeCode: (code: string) => void;
   storeUsername: (username: string) => void;
   storeHost: (host: boolean) => void;
+  storeLastTask: (lastTask: string) => void;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -25,6 +27,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     code: null,
     username: null,
     host: false,
+    lastTask: null,
   });
 
   const storeCode = (code: string) => {
@@ -39,8 +42,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setUserData((prevData) => ({ ...prevData, host }));
   };
 
+  const storeLastTask = (lastTask: string) => {
+    setUserData((prevData) => ({ ...prevData, lastTask }));
+  }
+
   return (
-    <AppContext.Provider value={{ userData, storeCode, storeUsername, storeHost }}>
+    <AppContext.Provider value={{ userData, storeCode, storeUsername, storeHost, storeLastTask }}>
       {children}
     </AppContext.Provider>
   );

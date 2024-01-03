@@ -1,6 +1,6 @@
 // ChatScreen.tsx
 import React, { useLayoutEffect, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Button, Alert, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Button, Alert, SafeAreaView, FlatList, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -16,10 +16,10 @@ const UploadImageScreen: React.FC = () => {
     const navigation = useNavigation();
     const [imageUri, setImageUri] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [task, setTask] = useState<{ text: string } | null>(null);
+    const [task, setTask] = useState('Wacht op de eerste opdracht...');
     //const [task, setTask] = useState<{ text: string } | null>(null);
     //const [task, setTask] = useState([]);
-    const { userData, storeCode, storeUsername, storeHost } = useAppContext();
+    const { userData, storeCode, storeUsername, storeHost, storeLastTask } = useAppContext();
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -40,10 +40,17 @@ const UploadImageScreen: React.FC = () => {
           const tasks = Object.values(data);
           
           if (tasks.length > 0) {
-            let newTask = [];
-            const newTask = tasks[tasks.length - 1]; // Get the last item in the array
-            console.log(newTask as string);
-            setTask(newTask);
+            const lastTask = tasks[tasks.length - 1];
+            console.log(lastTask);
+            const lastTaskText = (lastTask as { text: string }).text;
+            console.log(lastTaskText);
+            setTask(lastTaskText);
+            storeLastTask(lastTaskText);
+
+            // let newTask = [];
+            // newTask.push(tasks[tasks.length - 1]); // Get the last item in the array
+            // console.log(newTask);
+            // setTask(newTask as never[]);
           }
         }
       };
@@ -124,20 +131,30 @@ const UploadImageScreen: React.FC = () => {
 
             const response = await fetch(imageUri);
             const blob = await response.blob();
-            const fileName = `${Date.now()}.jpg`;
-            const storageRef = storage().ref(`images/${fileName}`);
+            const name = userData.username;
+            const fileName = `${name}.jpg`;
+            const chatRoomId = userData.code;
+            const task = userData.lastTask;
+            const storageRef = storage().ref(`images/${chatRoomId}/${task}/${fileName}`);
             await storageRef.put(blob);
 
             // Get the download URL
             const downloadURL = await storageRef.getDownloadURL();
 
-            // Save downloadURL in the Realtime Database
-            await database().ref('chats/default/messages').push({
-                imageUrl: downloadURL,
-                timestamp: database.ServerValue.TIMESTAMP,
-            });
+            const urlData = {
+              imageUrl: downloadURL,
+              //timestamp: database.ServerValue.TIMESTAMP,
+            };
 
-            Alert.alert('Image Uploaded Successfully!');
+            const db = getDatabase();
+            const newUrlRef = push(ref(db, 'chatRooms/' + userData.code + '/photos'));
+
+            set(newUrlRef, urlData);
+
+            // Save downloadURL in the Realtime Database
+            ToastAndroid.show('Image Uploaded Successfully!', ToastAndroid.SHORT);
+
+            setImageUri(null);
         } catch (error) {
             console.error('Error uploading image:', error);
             Alert.alert('Error uploading image. Please try again.');
@@ -153,6 +170,11 @@ const UploadImageScreen: React.FC = () => {
                 <Text style={styles.buttonText}>Select Image</Text>
             </TouchableOpacity> */}
             <Text style={[styles.buttonSecondary, {color: '#000000', marginBottom: 20, fontSize: 20}]}>{task}</Text>
+            {/* <FlatList 
+              data={task}
+              renderItem={({ item }) => (
+              <Text style={[styles.buttonSecondary, {color: '#000000', marginBottom: 20, fontSize: 20}]}>{item.text}</Text>)}
+            /> */}
             {userData.host ? (<HostTask/>) : null}
             <Button title="Upload Image" onPress={uploadImage} disabled={!imageUri} />
             <TouchableOpacity onPress={handleCameraLaunch} style={styles.button}>

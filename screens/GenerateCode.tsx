@@ -45,6 +45,15 @@ const GenerateScreen: React.FC = () => {
 
     set(newMessageRef, messageData);
     storeHost(true);
+
+    const messageDataUser = {
+      name: username,
+      value: 0, 
+    };
+
+    const newMessageRefUser = push(ref(db, 'chatRooms/' + code + '/players'));
+
+    set(newMessageRefUser, messageDataUser);
     }
   };
 
