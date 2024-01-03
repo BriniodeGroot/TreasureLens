@@ -100,10 +100,9 @@ function App() {
           }}
           />
         </Stack.Navigator>
-        {/* <MainNavigator /> */}
       </NavigationContainer>
-    </AppProvider>
-  );
-}
+    </AppProvider>  
+  );    
+  }
 
 export default App;
