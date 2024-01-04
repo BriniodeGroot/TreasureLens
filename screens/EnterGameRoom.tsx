@@ -15,6 +15,7 @@ const EnterScreen: React.FC = () => {
   const [code, setCode] = useState('');
   const [username, setUsername] = useState('');
   const { userData, storeCode, storeUsername, storeHost } = useAppContext();
+  const isDarkMode = userData.themeDark;
   
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -49,22 +50,22 @@ const EnterScreen: React.FC = () => {
 
   return (
     
-    <View style={styles.container}> 
+    <View style={isDarkMode ? styles.containerDark : styles.containerLight}> 
       <Image
       source={require('../images/logo.jpg')}
       style={{ width: 100, height: 100, marginTop: 5, borderRadius: 10 }}
       />
       <Text style={styles.text}>Vul hier je username in en de code van de gameruimte om deel te nemen</Text>
-      <Text>Username:</Text>
+      <Text style = {isDarkMode ? styles.textDark : styles.textLight}>Username:</Text>
       <TextInput
-        style={styles.input}
+        style = {isDarkMode ? styles.inputDark : styles.inputLight}
         placeholder="Username"
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
-      <Text>Code:</Text>
+      <Text style = {isDarkMode ? styles.textDark : styles.textLight}>Code:</Text>
       <TextInput
-        style={styles.input}
+        style = {isDarkMode ? styles.inputDark : styles.inputLight}
         placeholder="Game Room Code"
         value={code}
         onChangeText={(text) => setCode(text)}

@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { useAppContext } from './AppContext';
 
 // Define the dimensions for responsiveness
 const { width, height } = Dimensions.get('window');
@@ -15,6 +16,7 @@ const colors = {
   darkgreen: '#325c42',
   fullblack: '#000000',
   yellowLogo: '#fec671',
+  white: '#FFFFFF'
   // Add more colors as needed
 };
 
@@ -47,6 +49,8 @@ type Styles = {
   buttonSecondary: any;
   buttonThird: any;
   scrollViewContent: any;
+  containerDark: any;
+  containerLight: any;
   // Add more styles as needed
 };
 
@@ -60,6 +64,56 @@ const styles: Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 30,
+  },
+  containerDark: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    backgroundColor: colors.fullblack,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 30,
+  },
+  containerLight: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    backgroundColor: colors.white,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 30,
+  },
+  textDark: {
+    color: colors.white,
+  },
+  textLight: {
+    color: colors.fullblack,
+  },
+  inputDark: {
+    width: width - 40,
+    height: 50,
+    backgroundColor: colors.textSecondary,
+    borderRadius: 5,
+    borderWidth: 1, // Add this line to specify the border width
+    borderColor: colors.white,
+    padding: 10,
+    marginTop: 20,
+    fontSize: 16,
+    fontFamily: fonts.regular,
+    color: colors.fullblack,
+  },
+  inputLight: {
+    width: width - 40,
+    height: 50,
+    backgroundColor: colors.textSecondary,
+    borderRadius: 5,
+    borderWidth: 1, // Add this line to specify the border width
+    borderColor: colors.fullblack,
+    padding: 10,
+    marginTop: 20,
+    fontSize: 16,
+    fontFamily: fonts.regular,
+    color: colors.fullblack,
   },
   header: {
     width: '100%',

@@ -15,6 +15,7 @@ const GenerateScreen: React.FC = () => {
   const [username, setUsername] = useState('');
   const [randomCode, setRandomCode] = useState('******');
   const { userData, storeCode, storeUsername, storeHost } = useAppContext();
+  const isDarkMode = userData.themeDark;
   
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -84,7 +85,7 @@ const GenerateScreen: React.FC = () => {
 
   return (
     
-    <View style={styles.container}> 
+    <View style={isDarkMode ? styles.containerDark : styles.containerLight}> 
       <Image
       source={require('../images/logo.jpg')}
       style={{ width: 100, height: 100, marginTop: 5, borderRadius: 10 }}

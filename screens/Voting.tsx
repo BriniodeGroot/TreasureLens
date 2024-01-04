@@ -15,6 +15,7 @@ const VotingScreen: React.FC = () => {
   const [images, setImages] = useState([]);
   const [winner, setWinner] = useState('');
   const [names, setNames] = useState([]);
+  const isDarkMode = userData.themeDark;
 
   
   useLayoutEffect(() => {
@@ -88,7 +89,7 @@ const VotingScreen: React.FC = () => {
 
   return (
     
-    <View style={styles.container}>
+    <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
       
       <Image
       source={require('../images/logo.jpg')}

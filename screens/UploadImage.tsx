@@ -20,6 +20,7 @@ const UploadImageScreen: React.FC = () => {
     //const [task, setTask] = useState<{ text: string } | null>(null);
     //const [task, setTask] = useState([]);
     const { userData, storeCode, storeUsername, storeHost, storeLastTask } = useAppContext();
+    const isDarkMode = userData.themeDark;
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -165,7 +166,7 @@ const UploadImageScreen: React.FC = () => {
 
     return (
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <View style={styles.container}>
+        <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
             <Image source={require('../images/logo.jpg')} style={{ width: 50, height: 50, marginTop: 5, borderRadius: 10 }} />
             <Text style={styles.text}>Upload hier je foto voor de opdracht</Text>
             {/* <TouchableOpacity onPress={selectImage} style={styles.button}>

@@ -6,6 +6,7 @@ interface UserData {
   username: string | null;
   host: boolean | null;
   lastTask: string | null;
+  themeDark: boolean | null;
 }
 
 interface AppContextProps {
@@ -14,6 +15,8 @@ interface AppContextProps {
   storeUsername: (username: string) => void;
   storeHost: (host: boolean) => void;
   storeLastTask: (lastTask: string) => void;
+  storeThemeDark: (themeDark: boolean) => void;
+  //theme: ThemeContextProps; // Include the theme in AppContext
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -28,6 +31,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     username: null,
     host: false,
     lastTask: null,
+    themeDark: true,
   });
 
   const storeCode = (code: string) => {
@@ -44,10 +48,27 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   const storeLastTask = (lastTask: string) => {
     setUserData((prevData) => ({ ...prevData, lastTask }));
-  }
+  };
+
+  const storeThemeDark = (themeDark: boolean) => {
+    setUserData((prevData) => ({ ...prevData, themeDark }));
+  };
+
+  //const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  // const toggleDarkMode = () => {
+  //   setDarkMode((prevMode) => !prevMode);
+  // };
+
+  // const themeContextValue: ThemeContextProps = {
+  //   darkMode,
+  //   toggleDarkMode,
+  // };
+
+  //const theme = themeContextValue;
 
   return (
-    <AppContext.Provider value={{ userData, storeCode, storeUsername, storeHost, storeLastTask }}>
+    <AppContext.Provider value={{ userData, storeCode, storeUsername, storeHost, storeLastTask, storeThemeDark }}>
       {children}
     </AppContext.Provider>
   );
