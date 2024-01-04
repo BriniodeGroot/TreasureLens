@@ -45,6 +45,8 @@ type Styles = {
   sendButton: any;
   sendButtonText: any;
   buttonSecondary: any;
+  buttonThird: any;
+  scrollViewContent: any;
   // Add more styles as needed
 };
 
@@ -103,6 +105,15 @@ const styles: Styles = StyleSheet.create({
   },
   buttonSecondary: {
     backgroundColor: colors.yellowLogo,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  buttonThird: {
+    backgroundColor: colors.darkgreen,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 50,
@@ -175,7 +186,13 @@ const styles: Styles = StyleSheet.create({
   sendButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
-  }
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 20,
+    backgroundColor: colors.fullblack,
+  },
   // Add more styles as per your app's design requirements
 });
 

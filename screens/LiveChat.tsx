@@ -32,9 +32,9 @@ const LiveChat: React.FC = () => {
       />
       <Text style={styles.text}>Dit is de live chat tijdens de game.</Text>
       <ChatComponent/>
-      <TouchableOpacity onPress={handleNavigateToUploadZone} style={styles.button}>
+      {/* <TouchableOpacity onPress={handleNavigateToUploadZone} style={styles.button}>
         <Text style={styles.buttonText}>Ga terug naar de uploadzone!</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

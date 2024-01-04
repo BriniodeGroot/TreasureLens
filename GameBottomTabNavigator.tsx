@@ -9,10 +9,21 @@ const Tab = createBottomTabNavigator();
 
 const GameBottomTabNavigator: React.FC = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="LiveChat" component={LiveChatScreen} />
-      <Tab.Screen name="UploadImage" component={UploadImageScreen} />
-      <Tab.Screen name="Voting" component={VotingScreen} />
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#fec671', // Color of the active tab
+        tabBarInactiveTintColor: 'white', // Color of inactive tabs
+        tabBarStyle: {
+          backgroundColor: 'black', // Background color of the tab bar
+        },
+        tabBarLabelStyle: {
+          fontSize: 16, // Font size of the tab labels
+        },
+      }}
+    >
+      <Tab.Screen name="Upload" component={UploadImageScreen} />
+      <Tab.Screen name="Stem" component={VotingScreen} />
+      <Tab.Screen name="Live Chat" component={LiveChatScreen} />
     </Tab.Navigator>
   );
 };

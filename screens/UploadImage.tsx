@@ -1,6 +1,6 @@
 // ChatScreen.tsx
 import React, { useLayoutEffect, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Button, Alert, SafeAreaView, FlatList, ToastAndroid } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Button, Alert, SafeAreaView, FlatList, ToastAndroid, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -162,10 +162,10 @@ const UploadImageScreen: React.FC = () => {
     };
 
     return (
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
             <Image source={require('../images/logo.jpg')} style={{ width: 50, height: 50, marginTop: 5, borderRadius: 10 }} />
             <Text style={styles.text}>Upload hier je foto voor de opdracht</Text>
-            {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}
             {/* <TouchableOpacity onPress={selectImage} style={styles.button}>
                 <Text style={styles.buttonText}>Select Image</Text>
             </TouchableOpacity> */}
@@ -176,17 +176,20 @@ const UploadImageScreen: React.FC = () => {
               <Text style={[styles.buttonSecondary, {color: '#000000', marginBottom: 20, fontSize: 20}]}>{item.text}</Text>)}
             /> */}
             {userData.host ? (<HostTask/>) : null}
-            <Button title="Upload Image" onPress={uploadImage} disabled={!imageUri} />
+            
             <TouchableOpacity onPress={handleCameraLaunch} style={styles.button}>
                 <Text style={styles.buttonText}>Launch Camera</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleNavigateToLiveChat} style={[styles.button, {marginTop: 300}]}>
+            {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}
+            <Text onPress={uploadImage} disabled={!imageUri} style={[styles.buttonThird, {color: 'white'}]}>Upload image</Text>
+            {/* <TouchableOpacity onPress={handleNavigateToLiveChat} style={[styles.button, {marginTop: 300}]}>
                 <Text style={styles.buttonText}>Ga naar live chat</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleNavigate} style={styles.button}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity onPress={handleNavigate} style={styles.button}>
                 <Text style={styles.buttonText}>Ga terug naar home</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
+      </ScrollView>
     );
 };
 
