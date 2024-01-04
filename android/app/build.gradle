@@ -93,7 +93,20 @@ android {
     }
     buildTypes {
         debug {
-            signingConfig signingConfigs.debug
+            // other configurations
+            sourceSets {
+                main {
+                    java {
+                        srcDir 'src/main/java'
+                        exclude 'src/main/java/**/__generated__/**'
+                    }
+                }
+            }
+            compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+         
         }
         release {
             // Caution! In production, you need to generate your own keystore file.

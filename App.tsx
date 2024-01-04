@@ -10,17 +10,17 @@ import UploadImage from './screens/UploadImage';
 import LiveChat from './screens/LiveChat';
 import GenerateCode from './screens/GenerateCode';
 import styles from './style';
-import SystemNavigationBar from 'react-native-system-navigation-bar';
+//import SystemNavigationBar from 'react-native-system-navigation-bar';
 import EnterScreen from './screens/EnterGameRoom';
 import Toast from 'react-native-toast-message';
 
-const Stack = createNativeStackNavigator();
+//const Stack = createNativeStackNavigator();
 
-function App() {
+const App: React.FC = () => {
   return (
     <AppProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="HomeScreen">
+        {/* <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen 
           name="Home"
           component={Home} 
@@ -99,10 +99,11 @@ function App() {
               },
           }}
           />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
+        <MainNavigator />
       </NavigationContainer>
     </AppProvider>  
   );    
-  }
+  };
 
 export default App;

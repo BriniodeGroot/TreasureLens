@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, Image, TouchableOpacity, TextInput, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../style';
-import SystemNavigationBar from 'react-native-system-navigation-bar';
+//import SystemNavigationBar from 'react-native-system-navigation-bar';
 import { useAppContext } from '../AppContext';
 import database from '@react-native-firebase/database';
 import { getDatabase, ref, set, push, off, onValue } from "firebase/database";
@@ -30,7 +30,7 @@ const EnterScreen: React.FC = () => {
         ToastAndroid.show('Vul gegevens in', ToastAndroid.SHORT);
         console.log('Vul gegevens in');
     } else {
-        navigation.navigate('UploadImage');
+        navigation.navigate('Game');
         storeCode(code);
         storeUsername(username);
         storeHost(false);

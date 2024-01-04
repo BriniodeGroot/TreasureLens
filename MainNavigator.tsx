@@ -1,22 +1,21 @@
 // MainNavigator.tsx
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './screens/Home';
-import SecondScreen from './screens/SecondScreen';
-import UploadImage from './screens/UploadImage';
-import LiveChat from './screens/LiveChat';
-import GenerateCode from './screens/GenerateCode';
-import VotingScreen from './screens/Voting';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/Home';
+import GenerateCodeScreen from './screens/GenerateCode';
+import EnterGameRoomScreen from './screens/EnterGameRoom';
+import GameBottomTabNavigator from './GameBottomTabNavigator';
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const MainNavigator: React.FC = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Upload" component={UploadImage} />
-      <Tab.Screen name="LiveChat" component={LiveChat} />
-      <Tab.Screen name="Voting" component={VotingScreen} />
-    </Tab.Navigator>
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="GenerateCode" component={GenerateCodeScreen} />
+      <Stack.Screen name="EnterGameRoom" component={EnterGameRoomScreen} />
+      <Stack.Screen name="Game" component={GameBottomTabNavigator} options={{ headerShown: false }} />
+    </Stack.Navigator>
   );
 };
 

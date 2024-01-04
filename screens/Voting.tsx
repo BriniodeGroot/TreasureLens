@@ -3,7 +3,7 @@ import React, { useLayoutEffect } from 'react';
 import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../style';
-import SystemNavigationBar from 'react-native-system-navigation-bar';
+//import SystemNavigationBar from 'react-native-system-navigation-bar';
 
 
 const VotingScreen: React.FC = () => {
