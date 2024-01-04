@@ -42,9 +42,7 @@ const UploadImageScreen: React.FC = () => {
           
           if (tasks.length > 0) {
             const lastTask = tasks[tasks.length - 1];
-            console.log(lastTask);
             const lastTaskText = (lastTask as { text: string }).text;
-            console.log(lastTaskText);
             setTask(lastTaskText);
             storeLastTask(lastTaskText);
 

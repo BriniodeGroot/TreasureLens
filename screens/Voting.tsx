@@ -1,6 +1,6 @@
 // HomeScreen.tsx
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../style';
 //import SystemNavigationBar from 'react-native-system-navigation-bar';
@@ -16,8 +16,8 @@ const VotingScreen: React.FC = () => {
   const [winner, setWinner] = useState('');
   const [names, setNames] = useState([]);
   const isDarkMode = userData.themeDark;
+  const [task, setTask] = useState('');
 
-  
   useLayoutEffect(() => {
     navigation.setOptions({
       //title: 'Custom Title', // Set a custom title
@@ -26,66 +26,39 @@ const VotingScreen: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    // Your code here
-  
-    const db = firebase.database();
-    // Replace with your actual chat room ID
-    const chatRoomId = userData.code;
     const task = userData.lastTask;
-    const player = userData.username;
-
-    console.log(task);
-
-    // const refPhotos = db.ref(`chatRooms/${chatRoomId}/photos`);
-    // const snapshot = await
-    // firebase.database().ref(`chatRooms/${chatRoomId}/photos`).orderByChild('task').equalTo(task).once('value');
-    // snapshot.forEach((snapshot) => {
-    //   console.log('taak:', snapshot.val().task);
-
-    // });
-  }, []);
-
-
-    // console.log(result);
-    // console.log(queryTasks);
-
-    // const onDataChange = (snapshot) => {
-    //   const filteredData = snapshot.val();
-    //   console.log('Filtered Data:', filteredData);
-    //   // Update your component state or take other actions with the new data
-    // };
   
-    // queryTasks.on('value', onDataChange);
+    const db = getDatabase();
+    const photosRef = ref(db, `chatRooms/${userData.code}/photos`);
   
-    // // Clean up the listener when the component unmounts
-    // return () => {
-    //   queryTasks.off('value', onDataChange);
-    // };
+    const handleSnapshot = (snapshot: any) => {
+      if (snapshot.exists()) {
+        console.log('task: ', task)
+        console.log('snapshot: ', snapshot)
+        const newImages: any[] | ((prevState: never[]) => never[]) = [];
+        snapshot.forEach((photoData: any) => {
+          const taskImage = photoData.val()?.task; // Use optional chaining to avoid errors
+          if (task === taskImage) {
+            newImages.push(photoData.val());
+          }
+        });
+        setImages(newImages);
+        console.log('images: ', newImages)
+      }
+    };
+  
+    const unsubscribe = onValue(photosRef, handleSnapshot);
+  
+    return () => {
+      unsubscribe();
+    };
+  
+  }, [userData.lastTask]);
   
 
-    // const handleSnapshot = (snapshot) => {
-    //   if (snapshot.exists()) {
-    //     const data = snapshot.val();
-    //     const imageArray = Object.values(data);
-    //     setImages(imageArray);
-    //   }
-    // };
-    
-    // // Retrieve the filtered data
-    // queryTasks.once('value', (snapshot) => {
-    // // Handle the retrieved data
-    // const filteredData = snapshot.val();
-    // console.log(filteredData);
-    // setImages(Object.values(filteredData));
-    // });
+  const vote = () => {
 
-  //   const unsubscribe = onValue(queryTasks, handleSnapshot);
-
-  //   // Unsubscribe when the component unmounts
-  //   return () => {
-  //     off(unsubscribe);
-  //   };
-  // }, []);
+  }
 
   return (
     
@@ -93,16 +66,30 @@ const VotingScreen: React.FC = () => {
       
       <Image
       source={require('../images/logo.jpg')}
-      style={{ width: 100, height: 100, marginTop: 20, borderRadius: 10 }}
+      style={{ width: 50, height: 50, marginTop: 0, borderRadius: 10 }}
       />
-      <Text style={styles.text}>Stem tijd, wie heeft de leukste foto?</Text>
+      <Text style={[styles.text, {fontSize: 16}]}>Stem tijd, wie heeft de leukste foto?</Text>
+      
       <FlatList
         data={images}
-        //keyExtractor={(item) => item.timestamp.toString()}
+        // keyExtractor={(item) => item.timestamp.toString()}
         renderItem={({ item }) => (
-          <Text>{item.name}</Text>
+        <View style={styles.scrollViewContent}>
+          <Text style={styles.smallText}>{item.name}:</Text>
+          {item.imageUrl && <Image source={{ uri: item.imageUrl }} style={styles.imagePreview} />}
+        </View>
         )}
       />
+      <TextInput
+        style={styles.input}
+        placeholder="naam van speler"
+        placeholderTextColor={'grey'}
+        value={winner}
+        onChangeText={(text) => setWinner(text)}
+      />
+      <TouchableOpacity onPress={vote} style={[styles.button, { marginBottom: 20 }]}>
+        <Text style={styles.buttonText}>Dien stem in</Text>
+      </TouchableOpacity>
     </View>
   );
   };

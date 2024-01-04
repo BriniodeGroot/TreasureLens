@@ -37,6 +37,7 @@ type Styles = {
   buttonText: any;
   input: any;
   text: any;
+  smallText: any;
   headerStyle: any;
   imagePreview: any;
   chatContainer: any;
@@ -147,6 +148,11 @@ const styles: Styles = StyleSheet.create({
     //borderColor: '#4a90e2', // Border color
     textAlign: 'center', // Center the text
     // Add other styling as needed
+  },
+  smallText: {
+    fontSize: 16, // Set the font size
+    color: colors.textSecondary, // Choose your color
+    margin: 5, // Margin around the tag
   },
   button: {
     backgroundColor: colors.lightgreen,

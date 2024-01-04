@@ -6,7 +6,7 @@ import styles from '../style';
 //import SystemNavigationBar from 'react-native-system-navigation-bar';
 import { useAppContext } from '../AppContext';
 import database from '@react-native-firebase/database';
-import { getDatabase, ref, set, push, off, onValue } from "firebase/database";
+import { getDatabase, ref, set, push, off, onValue, update, get, child, DataSnapshot } from "firebase/database";
 import Toast from 'react-native-toast-message';
 
 
@@ -31,20 +31,63 @@ const EnterScreen: React.FC = () => {
         ToastAndroid.show('Vul gegevens in', ToastAndroid.SHORT);
         console.log('Vul gegevens in');
     } else {
+        let playerExists = false;
         navigation.navigate('Game');
         storeCode(code);
         storeUsername(username);
         storeHost(false);
 
-        const messageData = {
+        const messageDataUser = {
           name: username,
           value: 0, 
         };
 
-        const db = getDatabase();
-        const newMessageRef = push(ref(db, 'chatRooms/' + code + '/players'));
+      const db = getDatabase();
+      const playersRef = ref(db, 'chatRooms/' + code + '/players');
 
-        set(newMessageRef, messageData);
+      const handleSnapshot = (snapshot: any) => {
+        if (snapshot.exists()) {
+          snapshot.forEach((playerData: DataSnapshot) => {
+            console.log('Player Data:', playerData.val().name);
+            const playerName = playerData.val().name;
+            if (playerName == username) {
+              console.log('naam bestaat al');
+              playerExists = true;
+              // The name already exists, so update the value field.
+              //update(playersRef.child(username), { value: 0 });
+            }
+          });
+        }
+      }
+
+      const unsubscribe = onValue(playersRef, handleSnapshot);
+
+      if (!playerExists) {
+        console.log(playerExists);
+        console.log('naam bestaat nog niet');
+
+        const newRefUser = push(ref(db, 'chatRooms/' + code + '/players'));
+
+        set(newRefUser, messageDataUser);
+      }
+
+      // Unsubscribe when the component unmounts
+      return () => {
+        off(unsubscribe);
+      };
+
+      // Check if the name already exists in the database.
+    //   get(playersRefChild).then((snapshot) => {
+    //   if (snapshot.exists()) {
+    //     console.log('naam bestaat al');
+    //     // The name already exists, so update the value field.
+    //     //update(playersRef.child(username), { value: 0 });
+    //   } else {
+    //     // The name does not exist, so create a new document.
+    //     push(playersRef, messageData);
+    //     console.log('naam bestaat nog niet');
+    //   }
+    // });
     }
 }
 
@@ -60,6 +103,7 @@ const EnterScreen: React.FC = () => {
       <TextInput
         style = {isDarkMode ? styles.inputDark : styles.inputLight}
         placeholder="Username"
+        placeholderTextColor={'grey'}
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
@@ -67,6 +111,7 @@ const EnterScreen: React.FC = () => {
       <TextInput
         style = {isDarkMode ? styles.inputDark : styles.inputLight}
         placeholder="Game Room Code"
+        placeholderTextColor={'grey'}
         value={code}
         onChangeText={(text) => setCode(text)}
       />
