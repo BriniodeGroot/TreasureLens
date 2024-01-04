@@ -143,6 +143,8 @@ const UploadImageScreen: React.FC = () => {
 
             const urlData = {
               imageUrl: downloadURL,
+              task: userData.lastTask,
+              name: userData.username,
               //timestamp: database.ServerValue.TIMESTAMP,
             };
 
