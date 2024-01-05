@@ -10,6 +10,7 @@ const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const { userData } = useAppContext();
+  const isDarkMode = userData.themeDark;
 
   // Subscribe to the chat messages
   useEffect(() => {
@@ -62,6 +63,7 @@ const ChatComponent = () => {
       const db = getDatabase();
       const newMessageRef = push(ref(db, 'chatRooms/' + chatRoomId + '/messages'));
 
+      setNewMessage('');
       // Set the message data under the unique key
       set(newMessageRef, messageData);
     }
@@ -111,7 +113,7 @@ const ChatComponent = () => {
           value={newMessage}
           onChangeText={(text) => setNewMessage(text)}
         />
-        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
+        <TouchableOpacity onPress={sendMessage} style = {isDarkMode ? styles.sendButton : styles.lightSendButton}>
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
       </View>

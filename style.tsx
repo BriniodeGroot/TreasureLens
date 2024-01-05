@@ -12,11 +12,13 @@ const colors = {
   textPrimary: '#333333', // Dark grey
   textSecondary: '#FFFFFF', // White
   error: '#FF0033', // Red
+  lightred: '#FF7F7F',
   lightgreen: '#71c993',
   darkgreen: '#325c42',
   fullblack: '#000000',
   yellowLogo: '#fec671',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
+  darkYellow: '#D5B60A',
   // Add more colors as needed
 };
 
@@ -154,8 +156,22 @@ const styles: Styles = StyleSheet.create({
     color: colors.textSecondary, // Choose your color
     margin: 5, // Margin around the tag
   },
+  lightSmallText: {
+    fontSize: 16, // Set the font size
+    color: colors.textPrimary, // Choose your color
+    margin: 5, // Margin around the tag
+  },
   button: {
     backgroundColor: colors.lightgreen,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  lightButton: {
+    backgroundColor: colors.yellowLogo,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 50,
@@ -172,8 +188,26 @@ const styles: Styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
   },
+  lightButtonSecondary: {
+    backgroundColor: colors.darkYellow,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
   buttonThird: {
     backgroundColor: colors.darkgreen,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  lightButtonThird: {
+    backgroundColor: colors.darkYellow,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 50,
@@ -244,6 +278,16 @@ const styles: Styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   sendButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+  },
+  lightSendButton: {
+    backgroundColor: colors.darkYellow,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  lightSendButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
   },

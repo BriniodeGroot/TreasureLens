@@ -4,9 +4,11 @@ import { View, Text, Button, StyleSheet, Image, TouchableOpacity, FlatList, Text
 import { useNavigation } from '@react-navigation/native';
 import styles from '../style';
 //import SystemNavigationBar from 'react-native-system-navigation-bar';
-import { getDatabase, ref, set, push, off, onValue, Query, orderByChild, equalTo } from "firebase/database";
+import { getDatabase, ref, set, push, off, onValue, Query, orderByChild, equalTo, update } from "firebase/database";
 import { useAppContext } from '../AppContext';
 import { firebase } from '@react-native-firebase/database';
+import { get } from 'firebase/database';
+
 
 
 const VotingScreen: React.FC = () => {
@@ -56,8 +58,62 @@ const VotingScreen: React.FC = () => {
   }, [userData.lastTask]);
   
 
-  const vote = () => {
 
+  const vote = () => {
+    const db = getDatabase();
+    const playerRef = ref(db, `chatRooms/${userData.code}/players`);
+
+    const enteredName = winner.trim();
+    if (!enteredName) {
+      console.warn('Vul een juiste spelersnaam in.');
+      return;
+    }
+
+    // Use get for the initial data fetch
+    get(playerRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          snapshot.forEach((playerData: any) => {
+            const playerName = playerData.val()?.name;
+            if (playerName === enteredName) {
+              const playerKey = playerData.key;
+              const currentPlayerValue = playerData.val()?.value || 0; // Set default value to 0 if not present
+              console.log('Player Value before vote:', currentPlayerValue);
+              console.warn('Gestemd op speler: ', playerName);
+
+              const newPlayerValue = currentPlayerValue + 1;
+
+              const updates = {};
+              updates[`chatRooms/${userData.code}/players/${playerKey}/value`] = newPlayerValue;
+
+              // Use on for subsequent updates
+              const unsubscribe = onValue(playerRef, (snapshot) => {
+                const updatedValue = snapshot.val()?.value;
+                console.log('New Player Value:', updatedValue);
+              });
+
+              // Update the player's value in the database
+              update(ref(db), updates);
+
+              return () => {
+                unsubscribe();
+              };
+            } else {
+              console.warn('Spelersnaam niet gevonden.');
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+  
+
+
+  function navigateToScore(): void {
+      navigation.navigate('Scoring');
   }
 
   return (
@@ -68,26 +124,29 @@ const VotingScreen: React.FC = () => {
       source={require('../images/logo.jpg')}
       style={{ width: 50, height: 50, marginTop: 0, borderRadius: 10 }}
       />
-      <Text style={[styles.text, {fontSize: 16}]}>Stem tijd, wie heeft de leukste foto?</Text>
+      <Text style={[styles.text, {fontSize: 16}]}>Tijd om te stemmen, wie heeft de leukste foto?</Text>
+      <TouchableOpacity onPress={navigateToScore} style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20 }]}>
+        <Text style={styles.buttonText}>Tussenstand</Text>
+      </TouchableOpacity>
       
       <FlatList
         data={images}
         // keyExtractor={(item) => item.timestamp.toString()}
         renderItem={({ item }) => (
         <View style={styles.scrollViewContent}>
-          <Text style={styles.smallText}>{item.name}:</Text>
+          <Text style={isDarkMode? styles.smallText: styles.lightSmallText}>{item.name}:</Text>
           {item.imageUrl && <Image source={{ uri: item.imageUrl }} style={styles.imagePreview} />}
         </View>
         )}
       />
       <TextInput
-        style={styles.input}
+        style={isDarkMode ? styles.input : styles.inputLight}
         placeholder="naam van speler"
         placeholderTextColor={'grey'}
         value={winner}
         onChangeText={(text) => setWinner(text)}
       />
-      <TouchableOpacity onPress={vote} style={[styles.button, { marginBottom: 20 }]}>
+      <TouchableOpacity onPress={vote} style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20 }]}>
         <Text style={styles.buttonText}>Dien stem in</Text>
       </TouchableOpacity>
     </View>

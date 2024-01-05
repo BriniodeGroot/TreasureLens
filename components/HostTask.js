@@ -23,6 +23,7 @@ const TaskManager = () => {
   const [nextTask, setNextTask] = useState('');
   const [availablePrompts, setAvailablePrompts] = useState([...prompts]);
   const { userData, storeCode, storeUsername, storeHost } = useAppContext();
+  const isDarkMode = userData.themeDark;
 
   const handleSendTask = () => {
     // Add logic to send the task (e.g., use an API call)
@@ -71,21 +72,21 @@ const TaskManager = () => {
 
   return (
     <View>
-        <Text>Opdracht Manager</Text>
-        <Text htmlFor="nextTaskInput">Volgende opdracht:</Text>
-        <Text>{nextTask}</Text>
+        <Text style = {isDarkMode ? styles.textDark : styles.textLight}>Opdracht Manager</Text>
+        <Text style = {isDarkMode ? styles.textDark : styles.textLight} htmlFor="nextTaskInput">Volgende opdracht:</Text>
+        <Text style = {isDarkMode ? styles.textDark : styles.textLight}>{nextTask}</Text>
         <TextInput
-          style={styles.input}
+          style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10}]}
           onChangeText={(text) => setNextTask(text)}
           value={nextTask}
         />
         {/* <Button onPress={handleSendTask} title="Send Task" style={styles.button}  /> */}
-        <TouchableOpacity onPress={handleSendTask} style={styles.sendButton}>
-          <Text style={styles.sendButtonText}>Verzend opdracht</Text>
+        <TouchableOpacity onPress={handleSendTask} style = {isDarkMode ? styles.sendButton : styles.lightSendButton}>
+          <Text style = {isDarkMode ? styles.sendButtonText : styles.lightSendButtonText}>Verzend opdracht</Text>
         </TouchableOpacity>
         {availablePrompts.length > 0 ? (
-        <TouchableOpacity onPress={handleSendRandomTask} style={styles.button}>
-          <Text style={styles.buttonText}>Kies random een opdracht</Text>
+        <TouchableOpacity onPress={handleSendRandomTask} style={isDarkMode ? styles.button : styles.lightButton}>
+          <Text style={isDarkMode ? styles.buttonText : styles.lightButtonText}>Kies random een opdracht</Text>
         </TouchableOpacity>
       ) : (
         <Text>De voorgemaakte opdrachten zijn op, wees creatief en verzin toffe opdrachten!</Text>

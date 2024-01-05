@@ -42,13 +42,13 @@ const HomeScreen: React.FC = () => {
       style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }}
       />
       <Text style={styles.text}>Welkom bij TreasureLens! De leukste zoektocht om samen met familie en vrienden te doen.</Text>
-      <TouchableOpacity onPress={handleNavigateToGenerate} style={[styles.button, { marginTop: 100, marginBottom: 0 }]}>
+      <TouchableOpacity onPress={handleNavigateToGenerate} style={[isDarkMode ? styles.button : styles.lightButton, { marginTop: 100, marginBottom: 0 }]}>
         <Text style={styles.buttonText}>Start zelf een spel</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleNavigateToChatScreen} style={styles.button}>
+      <TouchableOpacity onPress={handleNavigateToChatScreen} style={isDarkMode ? styles.button : styles.lightButton}>
         <Text style={styles.buttonText}>Deel mee aan een spel</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleNavigateToSettingsScreen} style={styles.button}>
+      <TouchableOpacity onPress={handleNavigateToSettingsScreen} style={isDarkMode ? styles.button : styles.lightButton}>
         <Text style={styles.buttonText}>Settings</Text>
       </TouchableOpacity>
     </View>

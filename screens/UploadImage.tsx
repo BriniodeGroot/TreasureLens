@@ -170,7 +170,7 @@ const UploadImageScreen: React.FC = () => {
             {/* <TouchableOpacity onPress={selectImage} style={styles.button}>
                 <Text style={styles.buttonText}>Select Image</Text>
             </TouchableOpacity> */}
-            <Text style={[styles.buttonSecondary, {color: '#000000', marginBottom: 20, fontSize: 20}]}>{task}</Text>
+            <Text style={[isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary, {color: '#000000', marginBottom: 20, fontSize: 20}]}>{task}</Text>
             {/* <FlatList 
               data={task}
               renderItem={({ item }) => (
@@ -178,11 +178,11 @@ const UploadImageScreen: React.FC = () => {
             /> */}
             {userData.host ? (<HostTask/>) : null}
             
-            <TouchableOpacity onPress={handleCameraLaunch} style={styles.button}>
+            <TouchableOpacity onPress={handleCameraLaunch} style={isDarkMode ? styles.button : styles.lightButton}>
                 <Text style={styles.buttonText}>Launch Camera</Text>
             </TouchableOpacity>
             {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}
-            <Text onPress={uploadImage} disabled={!imageUri} style={[styles.buttonThird, {color: 'white'}]}>Upload image</Text>
+            <Text onPress={uploadImage} disabled={!imageUri} style={[isDarkMode ? styles.buttonThird : styles.lightButtonThird, {color: 'white'}]}>Upload image</Text>
             {/* <TouchableOpacity onPress={handleNavigateToLiveChat} style={[styles.button, {marginTop: 300}]}>
                 <Text style={styles.buttonText}>Ga naar live chat</Text>
             </TouchableOpacity> */}

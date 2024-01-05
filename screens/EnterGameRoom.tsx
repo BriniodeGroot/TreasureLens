@@ -115,7 +115,7 @@ const EnterScreen: React.FC = () => {
         value={code}
         onChangeText={(text) => setCode(text)}
       />
-      <TouchableOpacity onPress={enter} style={[styles.button, { marginTop: 175, marginBottom: 20 }]}>
+      <TouchableOpacity onPress={enter} style={[isDarkMode ? styles.button : styles.lightButton, { marginTop: 175, marginBottom: 20 }]}>
         <Text style={styles.buttonText}>Speel mee</Text>
       </TouchableOpacity>
     </View>
