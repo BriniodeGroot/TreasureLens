@@ -124,10 +124,10 @@ const VotingScreen: React.FC = () => {
       source={require('../images/logo.jpg')}
       style={{ width: 50, height: 50, marginTop: 0, borderRadius: 10 }}
       />
-      <Text style={[styles.text, {fontSize: 16}]}>Tijd om te stemmen, wie heeft de leukste foto?</Text>
       <TouchableOpacity onPress={navigateToScore} style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20 }]}>
         <Text style={styles.buttonText}>Tussenstand</Text>
       </TouchableOpacity>
+      <Text style={[styles.text, {fontSize: 16}]}>Tijd om te stemmen, wie heeft de leukste foto?</Text>
       
       <FlatList
         data={images}

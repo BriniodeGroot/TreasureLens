@@ -43,7 +43,7 @@ const ScoringScreen: React.FC = () => {
   return (
     <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
       <Image source={require('../images/logo.jpg')} style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }} />
-      <Text style={styles.text}>Player Scores:</Text>
+      <Text style={styles.text}>Scores:</Text>
       <FlatList
         data={players}
         keyExtractor={(item) => item.key}

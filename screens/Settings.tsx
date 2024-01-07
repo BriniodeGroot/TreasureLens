@@ -37,7 +37,7 @@ const SettingsScreen: React.FC = () => {
       />
       <Text style={styles.text}>Settings</Text>
       <TouchableOpacity onPress={switchDarkMode} style={isDarkMode ? styles.button : styles.lightButton}>
-        <Text style={styles.buttonText}>Dark Mode</Text>
+      <Text style={styles.buttonText}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</Text>
       </TouchableOpacity>
     </View>
   );
