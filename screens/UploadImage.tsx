@@ -237,12 +237,12 @@ const UploadImageScreen: React.FC = () => {
               </TouchableOpacity>
             {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}
             <Text onPress={uploadImage} disabled={!imageUri} style={[isDarkMode ? styles.buttonThird : styles.lightButtonThird, { color: 'white' }]}>Upload image</Text>
-            <TouchableOpacity onPress={handleNavigateToLiveChat} style={[isDarkMode ? styles.button : styles.lightButton, { marginTop: 300 }]}>
+            {/* <TouchableOpacity onPress={handleNavigateToLiveChat} style={[isDarkMode ? styles.button : styles.lightButton, { marginTop: 300 }]}>
               <Text style={styles.buttonText}>Ga naar live chat</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleNavigate} style={isDarkMode ? styles.button : styles.lightButton}>
               <Text style={styles.buttonText}>Ga terug naar home</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </ScrollView>
       );

@@ -72,9 +72,7 @@ const TaskManager = () => {
 
   return (
     <View>
-        <Text style = {isDarkMode ? styles.textDark : styles.textLight}>Opdracht Manager</Text>
-        <Text style = {isDarkMode ? styles.textDark : styles.textLight} htmlFor="nextTaskInput">Volgende opdracht:</Text>
-        <Text style = {isDarkMode ? styles.textDark : styles.textLight}>{nextTask}</Text>
+        
         <TextInput
           style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10}]}
           onChangeText={(text) => setNextTask(text)}

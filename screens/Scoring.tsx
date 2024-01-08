@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, Image, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getDatabase, ref, onValue } from 'firebase/database';
@@ -11,6 +11,20 @@ const ScoringScreen: React.FC = () => {
   const isDarkMode = userData.themeDark;
 
   const [players, setPlayers] = useState([]);
+
+  useLayoutEffect(() => { 
+    navigation.setOptions({
+      title: 'Score', // Set a custom title
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        color: 'white', // Set the title color
+      },
+      headerStyle: {
+        backgroundColor: 'black', // Set the desired color
+        
+      },
+    });
+  }, [navigation]);
 
   useEffect(() => {
     const db = getDatabase();
