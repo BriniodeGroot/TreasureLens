@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, Alert, ScrollView, FlatList, ToastAndroid } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Alert, ScrollView, FlatList, ToastAndroid, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -21,6 +21,7 @@ const UploadImageScreen: React.FC = () => {
   const [isTabBarVisible, setTabBarVisible] = useState(true);
 
   useLayoutEffect(() => {
+    
     navigation.setOptions({
       headerShown: false,
       tabBarVisible: isTabBarVisible,
@@ -31,6 +32,11 @@ const UploadImageScreen: React.FC = () => {
   }, [isTabBarVisible, navigation]);
 
   useEffect(() => {
+    const backAction = () => {
+      // Disable the back button functionality
+      return true; // Return true to prevent default behavior (exit the app)
+    };
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
     const db = getDatabase();
     const chatRoomId = userData.code;
     const chatRef: Query = ref(db, `chatRooms/${chatRoomId}/tasks`);
@@ -52,6 +58,7 @@ const UploadImageScreen: React.FC = () => {
     const unsubscribe = onValue(chatRef, handleSnapshot);
 
     return () => {
+      backHandler.remove();
       off(unsubscribe);
     };
   }, []);

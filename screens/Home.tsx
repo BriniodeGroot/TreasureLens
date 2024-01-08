@@ -1,6 +1,6 @@
 // HomeScreen.tsx
 import React, { useLayoutEffect } from 'react';
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, TouchableOpacity, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../style';
 import { useAppContext } from '../AppContext'
@@ -9,12 +9,13 @@ import { useAppContext } from '../AppContext'
 
 
 const HomeScreen: React.FC = () => {
+
   const navigation = useNavigation();
   const { userData, storeCode, storeUsername, storeHost, storeLastTask, storeThemeDark } = useAppContext();
 
   const isDarkMode = userData.themeDark;
   
-  useLayoutEffect(() => {
+  useLayoutEffect(() => { 
     navigation.setOptions({
       //title: 'Custom Title', // Set a custom title
       headerShown: false, // Hide the header
