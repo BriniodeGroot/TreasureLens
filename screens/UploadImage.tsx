@@ -7,21 +7,28 @@ import { getDatabase, ref, push, off, onValue, Query, set } from 'firebase/datab
 import { useAppContext } from '../AppContext';
 import styles from '../style';
 import HostTask from '../components/HostTask';
+import { useIsFocused } from '@react-navigation/native';
 
 const UploadImageScreen: React.FC = () => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [task, setTask] = useState('Wacht op de eerste opdracht...');
-  const { userData, storeLastTask } = useAppContext();
+  const { userData, storeLastTask, storeGameEnded } = useAppContext();
   const isDarkMode = userData.themeDark;
   const [showTopPlayers, setShowTopPlayers] = useState(false);
   const [topPlayers, setTopPlayers] = useState([]);
+  const [isTabBarVisible, setTabBarVisible] = useState(true);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
+      tabBarVisible: isTabBarVisible,
+      
+      
     });
-  }, [navigation]);
+    console.log('TabBarVisible:', isTabBarVisible);
+  }, [isTabBarVisible, navigation]);
 
   useEffect(() => {
     const db = getDatabase();
@@ -78,6 +85,7 @@ const UploadImageScreen: React.FC = () => {
     }
   }, [showTopPlayers, userData.code]);
 
+  
   const handleEndGame = () => {
     Alert.alert(
       'Bevestig',
@@ -90,7 +98,9 @@ const UploadImageScreen: React.FC = () => {
         {
           text: 'Ja',
           onPress: () => {
+            setTabBarVisible(false);
             setShowTopPlayers(true);
+            storeGameEnded(true);
           },
         },
       ],
@@ -185,7 +195,7 @@ const UploadImageScreen: React.FC = () => {
   };
 
   const renderContent = () => {
-    if (showTopPlayers) {
+    if (userData.gameEnded) {
       return (
         <View style={styles.container}>
           <Text style={styles.text}>Top Players:</Text>
@@ -234,5 +244,6 @@ const UploadImageScreen: React.FC = () => {
 
   return renderContent();
 };
+
 
 export default UploadImageScreen;

@@ -116,6 +116,17 @@ const VotingScreen: React.FC = () => {
       navigation.navigate('Scoring');
   }
 
+  const renderContent = () => {
+    if (userData.gameEnded) {
+      return (
+      <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
+        <Image
+      source={require('../images/logo.jpg')}
+      style={{ width: 100, height: 100, marginTop: 0, borderRadius: 10 }}
+      />
+      <Text style={[styles.text, {fontSize: 16}]}>Jammer, de game is voorbij!</Text>
+      </View>
+    )} else {
   return (
     
     <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
@@ -151,6 +162,10 @@ const VotingScreen: React.FC = () => {
       </TouchableOpacity>
     </View>
   );
+        }
   };
+
+  return renderContent();
+};
 
 export default VotingScreen;
