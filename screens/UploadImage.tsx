@@ -8,6 +8,7 @@ import { useAppContext } from '../AppContext';
 import styles from '../style';
 import HostTask from '../components/HostTask';
 import { useIsFocused } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const UploadImageScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -19,6 +20,7 @@ const UploadImageScreen: React.FC = () => {
   const [showTopPlayers, setShowTopPlayers] = useState(false);
   const [topPlayers, setTopPlayers] = useState([]);
   const [isTabBarVisible, setTabBarVisible] = useState(true);
+  const [cameraDisabled, setCameraDisabled] = useState(false);
 
   useLayoutEffect(() => {
     
@@ -51,6 +53,7 @@ const UploadImageScreen: React.FC = () => {
           const lastTaskText = (lastTask as { text: string }).text;
           setTask(lastTaskText);
           storeLastTask(lastTaskText);
+          setCameraDisabled(false);
         }
       }
     };
@@ -164,13 +167,19 @@ const UploadImageScreen: React.FC = () => {
   };
 
   const uploadImage = async () => {
+    if (cameraDisabled) {
+      ToastAndroid.show('U heeft al een foto geuploaded.', ToastAndroid.SHORT);
+    } else {
     try {
       if (!imageUri) {
-        Alert.alert('Select an image first!');
+        ToastAndroid.show('Geen foto geselecteerd!', ToastAndroid.SHORT);
         return;
       }
 
+      setCameraDisabled(true);
+
       const response = await fetch(imageUri);
+      setImageUri(null);
       const blob = await response.blob();
       const name = userData.username;
       const fileName = `${name}.jpg`;
@@ -192,14 +201,15 @@ const UploadImageScreen: React.FC = () => {
 
       set(newUrlRef, urlData);
 
-      ToastAndroid.show('Image Uploaded Successfully!', ToastAndroid.SHORT);
+      ToastAndroid.show('Foto uploaden gelukt!', ToastAndroid.SHORT);
 
-      setImageUri(null);
+      
     } catch (error) {
       console.error('Error uploading image:', error);
-      Alert.alert('Error uploading image. Please try again.');
+      Alert.alert('Foto uploaden mislukt, probeer opnieuw!');
     }
   };
+};
 
   const renderContent = () => {
     if (userData.gameEnded) {
@@ -223,26 +233,34 @@ const UploadImageScreen: React.FC = () => {
       return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
-            <Image source={require('../images/logo.jpg')} style={{ width: 50, height: 50, marginTop: 5, borderRadius: 10 }} />
-            <TouchableOpacity
-              onPress={handleEndGame}
-              style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20, display: userData.host ? 'flex' : 'none' },]}>
-              <Text style={styles.buttonText}>Beindig het spel</Text>
-            </TouchableOpacity>
-            <Text style={styles.text}>Upload hier je foto voor de opdracht</Text>
-            <Text style={[isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary, { color: '#000000', marginBottom: 20, fontSize: 20 }]}>{task}</Text>
-            {userData.host ? (<HostTask />) : null}
-            <TouchableOpacity onPress={handleCameraLaunch} style={isDarkMode ? styles.button : styles.lightButton}>
-              <Text style={styles.buttonText}>Launch Camera</Text>
+            <View style={styles.createCodeContainer}>
+              <Image
+                source={require('../images/logo.jpg')}
+                style={{ width: 100, height: 100, borderRadius: 10 }}
+              />
+              <TouchableOpacity
+                onPress={handleEndGame}
+                style={[isDarkMode ? [styles.button, {backgroundColor: '#9197AE'}] : styles.lightButton, { marginBottom: 20, display: userData.host ? 'flex' : 'none' },]}>
+                  <Icon name="ban-outline" size={28} color="black" />
+                  <Text style={styles.buttonText}>Beindig het spel</Text>
               </TouchableOpacity>
+            </View>
+            <Text style={[styles.text]}>Upload hier je foto voor de opdracht</Text>
+            <Text style={[isDarkMode ? styles.taskContainer : styles.lightButtonSecondary, { color: '#000000', marginBottom: 20, fontSize: 20 }]}>{task}</Text>
+            {userData.host ? (<HostTask />) : null}
+            <View style={styles.cameraContainer}>
+              <TouchableOpacity onPress={handleCameraLaunch} style={isDarkMode ? styles.button : styles.lightButton}>
+                <Icon name="camera-outline" size={28} color="black" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={uploadImage} style={isDarkMode ? styles.button : styles.lightButton}>
+                <Text style={styles.buttonText}>Verstuur foto</Text>
+              </TouchableOpacity>
+              
+              
+            </View>
+
             {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}
-            <Text onPress={uploadImage} disabled={!imageUri} style={[isDarkMode ? styles.buttonThird : styles.lightButtonThird, { color: 'white' }]}>Upload image</Text>
-            {/* <TouchableOpacity onPress={handleNavigateToLiveChat} style={[isDarkMode ? styles.button : styles.lightButton, { marginTop: 300 }]}>
-              <Text style={styles.buttonText}>Ga naar live chat</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleNavigate} style={isDarkMode ? styles.button : styles.lightButton}>
-              <Text style={styles.buttonText}>Ga terug naar home</Text>
-            </TouchableOpacity> */}
+            
           </View>
         </ScrollView>
       );

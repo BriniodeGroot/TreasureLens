@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, Text, Image, FlatList } from 'react-native';
+import React, { useState, useEffect, useLayoutEffect  } from 'react';
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { useAppContext } from '../AppContext';
@@ -54,6 +54,10 @@ const ScoringScreen: React.FC = () => {
     };
   }, [userData.code]);
 
+  const back = () => {
+    navigation.navigate('Game');
+  }
+
   return (
     <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
       <Image source={require('../images/logo.jpg')} style={{ width: 200, height: 200, marginTop: 20, borderRadius: 10 }} />
@@ -63,12 +67,15 @@ const ScoringScreen: React.FC = () => {
         keyExtractor={(item) => item.key}
         renderItem={({ item, index }) => (
           <View>
-            <Text>
+            <Text style={styles.textDark}>
               {index + 1}. {item.name}: {item.score}
             </Text>
           </View>
         )}
       />
+      <TouchableOpacity onPress={back} style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20 }]}>
+        <Text style={styles.buttonText}>Terug</Text>
+      </TouchableOpacity>
     </View>
   );
 };

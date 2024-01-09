@@ -71,26 +71,28 @@ const TaskManager = () => {
   };
 
   return (
-    <View>
+    <View style={styles.hostTaskContainer}>
         
         <TextInput
-          style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10}]}
+          style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10, justifyContent: 'center'}]}
           onChangeText={(text) => setNextTask(text)}
           value={nextTask}
           placeholder="Typ hier je opdracht"
           placeholderTextColor={'grey'}
         />
         {/* <Button onPress={handleSendTask} title="Send Task" style={styles.button}  /> */}
-        <TouchableOpacity onPress={handleSendTask} style = {isDarkMode ? styles.button : styles.lightSendButton}>
-          <Text style = {isDarkMode ? styles.buttonText : styles.lightButtonText}>Verzend opdracht</Text>
-        </TouchableOpacity>
-        {availablePrompts.length > 0 ? (
-        <TouchableOpacity onPress={handleSendRandomTask} style={isDarkMode ? styles.button : styles.lightButton}>
-          <Text style={isDarkMode ? styles.buttonText : styles.lightButtonText}>Kies random een opdracht</Text>
-        </TouchableOpacity>
-      ) : (
-        <Text>De voorgemaakte opdrachten zijn op, wees creatief en verzin toffe opdrachten!</Text>
-      )}
+        <View style={styles.createCodeContainer}>
+          {availablePrompts.length > 0 ? (
+            <TouchableOpacity onPress={handleSendRandomTask} style={isDarkMode ? styles.buttonSecondary : styles.lightButton}>
+              <Text style={isDarkMode ? styles.buttonText : styles.lightButtonText}>Random opdracht</Text>
+            </TouchableOpacity>
+          ) : (
+            <Text style={styles.text}>De voorgemaakte opdrachten zijn op, wees creatief en verzin toffe opdrachten!</Text>
+          )}
+          <TouchableOpacity onPress={handleSendTask} style = {isDarkMode ? styles.button : styles.lightSendButton}>
+            <Text style = {isDarkMode ? styles.buttonText : styles.lightButtonText}>Verstuur</Text>
+          </TouchableOpacity>
+        </View>  
     </View>
   );
 };

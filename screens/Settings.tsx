@@ -14,7 +14,7 @@ const SettingsScreen: React.FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Score', // Set a custom title
+      title: 'Instellingen', // Set a custom title
       headerTintColor: 'white',
       headerTitleStyle: {
         color: 'white', // Set the title color
@@ -43,7 +43,7 @@ const SettingsScreen: React.FC = () => {
       source={require('../images/logo.jpg')}
       style={{ width: 100, height: 100, marginTop: 20, borderRadius: 10 }}
       />
-      <Text style={styles.text}>Settings</Text>
+      <Text style={styles.text}>Instellingen</Text>
       <TouchableOpacity onPress={switchDarkMode} style={isDarkMode ? styles.button : styles.lightButton}>
       <Text style={styles.buttonText}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</Text>
       </TouchableOpacity>

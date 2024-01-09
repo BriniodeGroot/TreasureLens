@@ -91,10 +91,10 @@ const GenerateScreen: React.FC = () => {
       style={{ width: 100, height: 100, marginTop: 5, borderRadius: 10 }}
       />
       <Text style={styles.text}>Maak hier een gameruimte aan en deel deze met je familie of vrienden.</Text>
-      <Text style = {isDarkMode ? styles.textDark : styles.textLight}>Username:</Text>
+      <Text style = {isDarkMode ? styles.textDark : styles.textLight}>Gebruikersnaam:</Text>
       <TextInput
         style = {isDarkMode ? styles.inputDark : styles.inputLight}
-        placeholder="Username"
+        placeholder="Gebruikersnaam"
         placeholderTextColor={'grey'}
         value={username}
         onChangeText={(text) => setUsername(text)}
@@ -105,7 +105,7 @@ const GenerateScreen: React.FC = () => {
       <Text style={styles.text}>{randomCode}</Text>
       <View style={styles.createCodeContainer}>
         <TouchableOpacity onPress={onSharePress} style={isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary}>
-          <Text style={styles.buttonText}>Share code</Text>
+          <Text style={styles.buttonText}>Deel code</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={startGame} style={isDarkMode ? styles.button : styles.lightButton} >
           <Text style={styles.buttonText}>Start het spel</Text>

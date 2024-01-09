@@ -113,8 +113,8 @@ const ChatComponent = () => {
           value={newMessage}
           onChangeText={(text) => setNewMessage(text)}
         />
-        <TouchableOpacity onPress={sendMessage} style = {isDarkMode ? styles.sendButton : styles.lightSendButton}>
-          <Text style={styles.sendButtonText}>Send</Text>
+        <TouchableOpacity onPress={sendMessage} style = {isDarkMode ? styles.button : styles.lightButton}>
+          <Text style={[styles.buttonText, {fontSize: 16}]}>Send</Text>
         </TouchableOpacity>
       </View>
     </View>

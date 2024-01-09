@@ -43,7 +43,7 @@ const HomeScreen: React.FC = () => {
         <Text style={styles.buttonText}>Start zelf een spel</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleNavigateToChatScreen} style={isDarkMode ? styles.button : styles.lightButton}>
-        <Text style={styles.buttonText}>Deel mee aan een spel</Text>
+        <Text style={styles.buttonText}>Doe mee aan een spel</Text>
       </TouchableOpacity>
     </View>
   );

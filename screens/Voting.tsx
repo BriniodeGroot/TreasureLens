@@ -1,6 +1,6 @@
 // HomeScreen.tsx
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity, FlatList, TextInput } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, TouchableOpacity, FlatList, TextInput, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../style';
 //import SystemNavigationBar from 'react-native-system-navigation-bar';
@@ -8,6 +8,7 @@ import { getDatabase, ref, set, push, off, onValue, Query, orderByChild, equalTo
 import { useAppContext } from '../AppContext';
 import { firebase } from '@react-native-firebase/database';
 import { get } from 'firebase/database';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
@@ -19,6 +20,7 @@ const VotingScreen: React.FC = () => {
   const [names, setNames] = useState([]);
   const isDarkMode = userData.themeDark;
   const [task, setTask] = useState('');
+  const [votingDisabled, setVotingDisabled] = useState(false);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -46,6 +48,7 @@ const VotingScreen: React.FC = () => {
         });
         setImages(newImages);
         console.log('images: ', newImages)
+        setVotingDisabled(false);
       }
     };
   
@@ -56,6 +59,14 @@ const VotingScreen: React.FC = () => {
     };
   
   }, [userData.lastTask]);
+
+  const checkVote = () => {
+    if (votingDisabled) {
+      ToastAndroid.show('Je hebt al gestemd', ToastAndroid.SHORT);
+    } else {
+      vote();
+    }
+  }
   
 
 
@@ -65,7 +76,8 @@ const VotingScreen: React.FC = () => {
 
     const enteredName = winner.trim();
     if (!enteredName) {
-      console.warn('Vul een juiste spelersnaam in.');
+      //console.warn('Vul een juiste spelersnaam in.');
+      ToastAndroid.show('Vul een spelersnaam in', ToastAndroid.SHORT);
       return;
     }
 
@@ -79,13 +91,15 @@ const VotingScreen: React.FC = () => {
               const playerKey = playerData.key;
               const currentPlayerValue = playerData.val()?.value || 0; // Set default value to 0 if not present
               console.log('Player Value before vote:', currentPlayerValue);
-              console.warn('Gestemd op speler: ', playerName);
+              //console.warn('Gestemd op speler: ', playerName);
+              ToastAndroid.show('Gestemd op speler: ' + playerName, ToastAndroid.SHORT);
 
               const newPlayerValue = currentPlayerValue + 1;
 
               const updates = {};
               updates[`chatRooms/${userData.code}/players/${playerKey}/value`] = newPlayerValue;
 
+              setVotingDisabled(true);
               // Use on for subsequent updates
               const unsubscribe = onValue(playerRef, (snapshot) => {
                 const updatedValue = snapshot.val()?.value;
@@ -99,7 +113,8 @@ const VotingScreen: React.FC = () => {
                 unsubscribe();
               };
             } else {
-              console.warn('Spelersnaam niet gevonden.');
+              //console.warn('Spelersnaam niet gevonden.');
+              ToastAndroid.show('Spelersnaam niet gevonden', ToastAndroid.SHORT);
             }
           });
         }
@@ -131,12 +146,10 @@ const VotingScreen: React.FC = () => {
     
     <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
       
-      <Image
-      source={require('../images/logo.jpg')}
-      style={{ width: 50, height: 50, marginTop: 0, borderRadius: 10 }}
-      />
-      <TouchableOpacity onPress={navigateToScore} style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20 }]}>
-        <Text style={styles.buttonText}>Tussenstand</Text>
+      
+      <TouchableOpacity onPress={navigateToScore} style={[isDarkMode ? [styles.button, {backgroundColor: '#9197AE'}] : [styles.lightButton, { marginBottom: 20 }]]}>
+        <Icon name="bar-chart-outline" size={28} color="black" />
+        <Text style={[styles.buttonText]}>Tussenstand</Text>
       </TouchableOpacity>
       <Text style={[styles.text, {fontSize: 16}]}>Tijd om te stemmen, wie heeft de leukste foto?</Text>
       
@@ -152,12 +165,12 @@ const VotingScreen: React.FC = () => {
       />
       <TextInput
         style={isDarkMode ? styles.input : styles.inputLight}
-        placeholder="naam van speler"
+        placeholder="Naam van speler"
         placeholderTextColor={'grey'}
         value={winner}
         onChangeText={(text) => setWinner(text)}
       />
-      <TouchableOpacity onPress={vote} style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20 }]}>
+      <TouchableOpacity onPress={checkVote} style={[isDarkMode ? styles.button : styles.lightButton, { marginBottom: 20 }]}>
         <Text style={styles.buttonText}>Dien stem in</Text>
       </TouchableOpacity>
     </View>

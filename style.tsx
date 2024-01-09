@@ -9,14 +9,17 @@ const colors = {
   primary: '#4a90e2', // Example: Blue
   secondary: '#50e3c2', // Example: Green
   background: '#f9f9f9', // Light grey
-  textPrimary: '#333333', // Dark grey
+  backGround: '#333333', // Dark grey
+  textPrimary: '#000000',
   textSecondary: '#FFFFFF', // White
   error: '#FF0033', // Red
   lightred: '#FF7F7F',
-  lightgreen: '#71c993',
+  //lightgreen: '#71c993',
+  lightgreen: '#4EBC78',
   darkgreen: '#325c42',
   fullblack: '#000000',
   yellowLogo: '#fec671',
+  lightBeige: '#B24C63',
   white: '#FFFFFF',
   darkYellow: '#D5B60A',
   // Add more colors as needed
@@ -55,6 +58,9 @@ type Styles = {
   containerDark: any;
   containerLight: any;
   createCodeContainer: any;
+  taskContainer: any;
+  cameraContainer: any;
+  hostTaskContainer: any;
   // Add more styles as needed
 };
 
@@ -94,6 +100,15 @@ const styles: Styles = StyleSheet.create({
   textLight: {
     color: colors.fullblack,
     fontSize: 16,
+  },
+  taskContainer: {
+    backgroundColor: colors.lightBeige,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
   },
   inputDark: {
     width: width - 40,
@@ -240,14 +255,14 @@ const styles: Styles = StyleSheet.create({
     backgroundColor: colors.fullblack, // Example background color
   },
   imagePreview: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
     marginTop: 10,
     borderRadius: 10,
   },
   chatContainer: {
     flex: 1,
-    backgroundColor: colors.textPrimary,
+    backgroundColor: colors.backGround,
     borderRadius: 8,
     marginVertical: 10,
   },
@@ -268,7 +283,7 @@ const styles: Styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 5,
     paddingHorizontal: 10,
-    backgroundColor: colors.textPrimary,
+    backgroundColor: colors.backGround,
     marginRight: 10,
   },
   inputChat: {
@@ -301,17 +316,31 @@ const styles: Styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
     paddingBottom: 20,
     backgroundColor: colors.fullblack,
   },
   createCodeContainer: {
     width: '100%',
-    backgroundColor: colors.fullblack,
     flexDirection: 'row',
     paddingHorizontal: 35,
     justifyContent: 'space-between', // Use space-between to position items at the beginning and end
     alignItems: 'center',
+    marginBottom: 20,
+  },
+  cameraContainer: {
+    width: '100%',
+    backgroundColor: colors.fullblack,
+    flexDirection: 'row',
+    paddingHorizontal: 65,
+    justifyContent: 'space-between', // Use space-between to position items at the beginning and end
+    alignItems: 'center',
+  },
+  hostTaskContainer: {
+    backgroundColor: colors.backGround,
+    padding: 5,
+    borderRadius: 8,
+    margin: 10,
   },
   // Add more styles as per your app's design requirements
 });
