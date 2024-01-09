@@ -61,6 +61,7 @@ type Styles = {
   taskContainer: any;
   cameraContainer: any;
   hostTaskContainer: any;
+  hostTaskButtonsContainer: any;
   // Add more styles as needed
 };
 
@@ -340,8 +341,15 @@ const styles: Styles = StyleSheet.create({
     backgroundColor: colors.backGround,
     padding: 5,
     borderRadius: 8,
-    margin: 10,
   },
+  hostTaskButtonsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    paddingHorizontal: 35,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  }
   // Add more styles as per your app's design requirements
 });
 

@@ -74,14 +74,14 @@ const TaskManager = () => {
     <View style={styles.hostTaskContainer}>
         
         <TextInput
-          style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10, justifyContent: 'center'}]}
+          style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10, marginLeft: 20}]}
           onChangeText={(text) => setNextTask(text)}
           value={nextTask}
           placeholder="Typ hier je opdracht"
           placeholderTextColor={'grey'}
         />
         {/* <Button onPress={handleSendTask} title="Send Task" style={styles.button}  /> */}
-        <View style={styles.createCodeContainer}>
+        <View style={styles.hostTaskButtonsContainer}>
           {availablePrompts.length > 0 ? (
             <TouchableOpacity onPress={handleSendRandomTask} style={isDarkMode ? styles.buttonSecondary : styles.lightButton}>
               <Text style={isDarkMode ? styles.buttonText : styles.lightButtonText}>Random opdracht</Text>
