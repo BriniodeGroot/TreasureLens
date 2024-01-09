@@ -54,6 +54,7 @@ type Styles = {
   scrollViewContent: any;
   containerDark: any;
   containerLight: any;
+  createCodeContainer: any;
   // Add more styles as needed
 };
 
@@ -88,9 +89,11 @@ const styles: Styles = StyleSheet.create({
   },
   textDark: {
     color: colors.white,
+    fontSize: 16,
   },
   textLight: {
     color: colors.fullblack,
+    fontSize: 16,
   },
   inputDark: {
     width: width - 40,
@@ -120,11 +123,13 @@ const styles: Styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 60,
-    backgroundColor: colors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    height: 40,
+    backgroundColor: colors.fullblack,
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    justifyContent: 'space-between', // Use space-between to position items at the beginning and end
+    alignItems: 'center', // Align items vertically in the center
+  },  
   headerTitle: {
     fontSize: 20,
     color: colors.textSecondary,
@@ -243,6 +248,8 @@ const styles: Styles = StyleSheet.create({
   chatContainer: {
     flex: 1,
     backgroundColor: colors.textPrimary,
+    borderRadius: 8,
+    marginVertical: 10,
   },
   messageContainer: {
     padding: 10,
@@ -258,14 +265,16 @@ const styles: Styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingVertical: 5,
     paddingHorizontal: 10,
     backgroundColor: colors.textPrimary,
+    marginRight: 10,
   },
   inputChat: {
     flex: 1,
     height: 40,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#E0E0E0',
     borderRadius: 8,
     paddingHorizontal: '35%',
@@ -295,6 +304,14 @@ const styles: Styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 20,
     backgroundColor: colors.fullblack,
+  },
+  createCodeContainer: {
+    width: '100%',
+    backgroundColor: colors.fullblack,
+    flexDirection: 'row',
+    paddingHorizontal: 35,
+    justifyContent: 'space-between', // Use space-between to position items at the beginning and end
+    alignItems: 'center',
   },
   // Add more styles as per your app's design requirements
 });

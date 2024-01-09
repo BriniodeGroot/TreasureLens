@@ -14,7 +14,15 @@ const SettingsScreen: React.FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerShown: false, // Hide the header
+      title: 'Score', // Set a custom title
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        color: 'white', // Set the title color
+      },
+      headerStyle: {
+        backgroundColor: 'black', // Set the desired color
+        
+      },
     });
   }, [navigation]);
 

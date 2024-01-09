@@ -23,7 +23,7 @@ const UploadImageScreen: React.FC = () => {
   useLayoutEffect(() => {
     
     navigation.setOptions({
-      headerShown: false,
+      headerShown: true,
       tabBarVisible: isTabBarVisible,
       
       

@@ -5,6 +5,7 @@ import UploadImageScreen from './screens/UploadImage';
 import VotingScreen from './screens/Voting';
 import { useAppContext } from './AppContext';
 import Icon from 'react-native-vector-icons/Ionicons';
+import HeaderGame from './components/HeaderGame';
 
 
 const Tab = createBottomTabNavigator();
@@ -49,9 +50,27 @@ const GameBottomTabNavigator: React.FC = () => {
       //   },
       // }}
     >
-      <Tab.Screen name="Upload" component={UploadImageScreen} />
-      <Tab.Screen name="Stem" component={VotingScreen} />
-      <Tab.Screen name="Live Chat" component={LiveChatScreen} />
+      <Tab.Screen name="Upload" component={UploadImageScreen} 
+      options={{
+        header: () => (
+          <HeaderGame></HeaderGame>
+        )
+      }}
+      />
+      <Tab.Screen name="Stem" component={VotingScreen} 
+      options={{
+        header: () => (
+          <HeaderGame></HeaderGame>
+        )
+      }}
+      />
+      <Tab.Screen name="Live Chat" component={LiveChatScreen}
+      options={{
+        header: () => (
+          <HeaderGame></HeaderGame>
+        )
+      }}
+      />
     </Tab.Navigator>
   );
 };

@@ -18,7 +18,7 @@ const HomeScreen: React.FC = () => {
   useLayoutEffect(() => { 
     navigation.setOptions({
       //title: 'Custom Title', // Set a custom title
-      headerShown: false, // Hide the header
+      headerShown: true, // Hide the header
     });
   }, [navigation]);
 
@@ -28,10 +28,6 @@ const HomeScreen: React.FC = () => {
 
   const handleNavigateToChatScreen = () => {
     navigation.navigate('EnterGameRoom');
-  };
-
-  const handleNavigateToSettingsScreen = () => {
-    navigation.navigate('Settings');
   };
 
   return (
@@ -48,9 +44,6 @@ const HomeScreen: React.FC = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={handleNavigateToChatScreen} style={isDarkMode ? styles.button : styles.lightButton}>
         <Text style={styles.buttonText}>Deel mee aan een spel</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleNavigateToSettingsScreen} style={isDarkMode ? styles.button : styles.lightButton}>
-        <Text style={styles.buttonText}>Settings</Text>
       </TouchableOpacity>
     </View>
   );

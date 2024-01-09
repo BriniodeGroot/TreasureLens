@@ -20,7 +20,7 @@ const EnterScreen: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       //title: 'Custom Title', // Set a custom title
-      headerShown: false, // Hide the header
+      headerShown: true, // Hide the header
     });
   }, [navigation]);
 

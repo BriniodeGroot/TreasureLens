@@ -20,7 +20,7 @@ const GenerateScreen: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       //title: 'Custom Title', // Set a custom title
-      headerShown: false, // Hide the header
+      headerShown: true, // Hide the header
     });
   }, [navigation]);
 
@@ -95,6 +95,7 @@ const GenerateScreen: React.FC = () => {
       <TextInput
         style = {isDarkMode ? styles.inputDark : styles.inputLight}
         placeholder="Username"
+        placeholderTextColor={'grey'}
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
@@ -102,12 +103,16 @@ const GenerateScreen: React.FC = () => {
         <Text style={styles.buttonText}>Geneer een code</Text>
       </TouchableOpacity>
       <Text style={styles.text}>{randomCode}</Text>
-      <TouchableOpacity onPress={startGame} style={isDarkMode ? styles.button : styles.lightButton} >
-        <Text style={styles.buttonText}>Start het spel</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={onSharePress} style={isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary}>
-        <Text style={styles.buttonText}>Share code</Text>
-      </TouchableOpacity>
+      <View style={styles.createCodeContainer}>
+        <TouchableOpacity onPress={onSharePress} style={isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary}>
+          <Text style={styles.buttonText}>Share code</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={startGame} style={isDarkMode ? styles.button : styles.lightButton} >
+          <Text style={styles.buttonText}>Start het spel</Text>
+        </TouchableOpacity>
+      </View>
+      
+      
     </View>
   );
 };
