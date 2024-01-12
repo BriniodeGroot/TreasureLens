@@ -71,7 +71,7 @@ const TaskManager = () => {
   };
 
   return (
-    <View style={styles.hostTaskContainer}>
+    <View style = {[isDarkMode ? styles.hostTaskContainer : styles.lightHostTaskContainer]}>
         
         <TextInput
           style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10, marginLeft: 20}]}
@@ -83,14 +83,14 @@ const TaskManager = () => {
         {/* <Button onPress={handleSendTask} title="Send Task" style={styles.button}  /> */}
         <View style={styles.hostTaskButtonsContainer}>
           {availablePrompts.length > 0 ? (
-            <TouchableOpacity onPress={handleSendRandomTask} style={isDarkMode ? styles.buttonSecondary : styles.lightButton}>
-              <Text style={isDarkMode ? styles.buttonText : styles.lightButtonText}>Random opdracht</Text>
+            <TouchableOpacity onPress={handleSendRandomTask} style={isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary}>
+              <Text style={isDarkMode ? styles.buttonText : styles.buttonText}>Random opdracht</Text>
             </TouchableOpacity>
           ) : (
             <Text style={styles.text}>De voorgemaakte opdrachten zijn op, wees creatief en verzin toffe opdrachten!</Text>
           )}
-          <TouchableOpacity onPress={handleSendTask} style = {isDarkMode ? styles.button : styles.lightSendButton}>
-            <Text style = {isDarkMode ? styles.buttonText : styles.lightButtonText}>Verstuur</Text>
+          <TouchableOpacity onPress={handleSendTask} style = {isDarkMode ? styles.button : styles.lightButton}>
+            <Text style = {isDarkMode ? styles.buttonText : styles.buttonText}>Verstuur</Text>
           </TouchableOpacity>
         </View>  
     </View>

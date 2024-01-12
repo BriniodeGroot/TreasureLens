@@ -30,7 +30,7 @@ const GameBottomTabNavigator: React.FC = () => {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#fec671', // Color of the active tab
+        tabBarActiveTintColor: isDarkMode? '#fec671' : 'red', // Color of the active tab
         tabBarInactiveTintColor: isDarkMode ? 'white' : 'black', // Color of inactive tabs
         tabBarStyle: {
           backgroundColor: isDarkMode ? 'black' : 'white', // Background color of the tab bar

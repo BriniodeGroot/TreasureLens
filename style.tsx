@@ -20,8 +20,9 @@ const colors = {
   fullblack: '#000000',
   yellowLogo: '#fec671',
   lightBeige: '#B24C63',
+  lightmodeTask: '#d9d8d7',
   white: '#FFFFFF',
-  darkYellow: '#D5B60A',
+  darkYellow: '#238fdb',
   // Add more colors as needed
 };
 
@@ -106,10 +107,21 @@ const styles: Styles = StyleSheet.create({
     backgroundColor: colors.lightBeige,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 50,
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
+  },
+  lightTaskContainer: {
+    backgroundColor: colors.lightBeige,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    borderWidth: 2, 
+    borderColor: 'black',
   },
   inputDark: {
     width: width - 40,
@@ -129,7 +141,7 @@ const styles: Styles = StyleSheet.create({
     height: 50,
     backgroundColor: colors.textSecondary,
     borderRadius: 5,
-    borderWidth: 1, // Add this line to specify the border width
+    borderWidth: 2, // Add this line to specify the border width
     borderColor: colors.fullblack,
     padding: 10,
     marginTop: 20,
@@ -145,6 +157,17 @@ const styles: Styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'space-between', // Use space-between to position items at the beginning and end
     alignItems: 'center', // Align items vertically in the center
+  },  
+  lightHeader: {
+    width: '100%',
+    height: 40,
+    backgroundColor: colors.lightmodeTask,
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    justifyContent: 'space-between', // Use space-between to position items at the beginning and end
+    alignItems: 'center', // Align items vertically in the center
+    borderWidth: 2, 
+    borderColor: 'black',
   },  
   headerTitle: {
     fontSize: 20,
@@ -199,7 +222,9 @@ const styles: Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
-  },
+    borderWidth: 2, 
+    borderColor: 'black',
+},
   buttonSecondary: {
     backgroundColor: colors.yellowLogo,
     paddingVertical: 10,
@@ -217,6 +242,8 @@ const styles: Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
+    borderWidth: 2, 
+    borderColor: 'black',
   },
   buttonThird: {
     backgroundColor: colors.darkgreen,
@@ -235,6 +262,8 @@ const styles: Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
+    borderWidth: 2, 
+    borderColor: 'black',
   },
   buttonText: {
     color: colors.textPrimary,
@@ -310,6 +339,8 @@ const styles: Styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 15,
+    borderWidth: 2, 
+    borderColor: 'black',
   },
   lightSendButtonText: {
     color: '#FFFFFF',
@@ -318,7 +349,7 @@ const styles: Styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
     //justifyContent: 'space-between',
-    paddingBottom: 20,
+    paddingBottom: 0,
     backgroundColor: colors.fullblack,
   },
   createCodeContainer: {
@@ -337,10 +368,25 @@ const styles: Styles = StyleSheet.create({
     justifyContent: 'space-between', // Use space-between to position items at the beginning and end
     alignItems: 'center',
   },
+  lightCameraContainer: {
+    width: '100%',
+    backgroundColor: colors.lightmodeTask,
+    flexDirection: 'row',
+    paddingHorizontal: 65,
+    justifyContent: 'space-between', // Use space-between to position items at the beginning and end
+    alignItems: 'center',
+  },
   hostTaskContainer: {
     backgroundColor: colors.backGround,
     padding: 5,
     borderRadius: 8,
+  },
+  lightHostTaskContainer: {
+    backgroundColor: colors.lightmodeTask,
+    padding: 5,
+    borderRadius: 8,
+    borderWidth: 2, 
+    borderColor: 'black',
   },
   hostTaskButtonsContainer: {
     width: '100%',

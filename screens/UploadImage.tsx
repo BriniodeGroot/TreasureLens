@@ -240,23 +240,21 @@ const UploadImageScreen: React.FC = () => {
               />
               <TouchableOpacity
                 onPress={handleEndGame}
-                style={[isDarkMode ? [styles.button, {backgroundColor: '#9197AE'}] : styles.lightButton, { marginBottom: 20, display: userData.host ? 'flex' : 'none' },]}>
+                style={[isDarkMode ? [styles.button, {backgroundColor: '#9197AE'}] : [styles.lightButton, { marginBottom: 20, backgroundColor: 'green', display: userData.host ? 'flex' : 'none' }],]}>
                   <Icon name="ban-outline" size={28} color="black" />
                   <Text style={styles.buttonText}>Beindig het spel</Text>
               </TouchableOpacity>
             </View>
             <Text style={[styles.text]}>Upload hier je foto voor de opdracht</Text>
-            <Text style={[isDarkMode ? styles.taskContainer : styles.lightButtonSecondary, { color: '#000000', marginBottom: 20, fontSize: 20 }]}>{task}</Text>
+            <Text style={[isDarkMode ? styles.taskContainer : styles.lightTaskContainer, { color: '#000000', marginBottom: 20, fontSize: 20 }]}>{task}</Text>
             {userData.host ? (<HostTask />) : null}
-            <View style={styles.cameraContainer}>
+            <View style={[isDarkMode ? styles.cameraContainer : styles.lightCameraContainer]}>
               <TouchableOpacity onPress={handleCameraLaunch} style={isDarkMode ? styles.button : styles.lightButton}>
                 <Icon name="camera-outline" size={28} color="black" />
               </TouchableOpacity>
               <TouchableOpacity onPress={uploadImage} style={isDarkMode ? styles.button : styles.lightButton}>
                 <Text style={styles.buttonText}>Verstuur foto</Text>
               </TouchableOpacity>
-              
-              
             </View>
 
             {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} />}

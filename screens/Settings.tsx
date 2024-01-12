@@ -13,18 +13,31 @@ const SettingsScreen: React.FC = () => {
   const isDarkMode = userData.themeDark;
 
   useLayoutEffect(() => {
-    navigation.setOptions({
-      title: 'Instellingen', // Set a custom title
-      headerTintColor: 'white',
-      headerTitleStyle: {
-        color: 'white', // Set the title color
-      },
-      headerStyle: {
-        backgroundColor: 'black', // Set the desired color
-        
-      },
-    });
-  }, [navigation]);
+    if (isDarkMode) {
+      navigation.setOptions({
+        title: 'Instellingen', // Set a custom title
+        headerTintColor: 'white',
+        headerTitleStyle: {
+          color: 'white', // Set the title color
+        },
+        headerStyle: {
+          backgroundColor: 'black', // Set the desired color
+        },
+      });
+    } else {
+      navigation.setOptions({
+        title: 'Instellingen', // Set a custom title
+        headerTintColor: 'black',
+        headerTitleStyle: {
+          color: 'black', // Set the title color
+        },
+        headerStyle: {
+          backgroundColor: 'white', // Set the desired color
+        },
+      });
+    }
+  }, [navigation, isDarkMode]);
+  
 
   const switchDarkMode = () => {
     if (userData.themeDark == false) {

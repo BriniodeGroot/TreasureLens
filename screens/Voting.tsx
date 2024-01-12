@@ -147,7 +147,7 @@ const VotingScreen: React.FC = () => {
     <View style={isDarkMode ? styles.containerDark : styles.containerLight}>
       
       
-      <TouchableOpacity onPress={navigateToScore} style={[isDarkMode ? [styles.button, {backgroundColor: '#9197AE'}] : [styles.lightButton, { marginBottom: 20 }]]}>
+      <TouchableOpacity onPress={navigateToScore} style={[isDarkMode ? [styles.button, {backgroundColor: '#9197AE'}] : [styles.lightButton, { backgroundColor: 'lightgreen'}]]}>
         <Icon name="bar-chart-outline" size={28} color="black" />
         <Text style={[styles.buttonText]}>Tussenstand</Text>
       </TouchableOpacity>

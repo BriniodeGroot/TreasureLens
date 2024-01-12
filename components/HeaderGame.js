@@ -4,8 +4,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { DrawerActions } from '@react-navigation/native';
 import Styles from '../style';
+import { useAppContext } from '../AppContext';
 
 export default function HeaderGame() {
+  const { userData, storeCode, storeUsername, storeHost } = useAppContext();
+  const isDarkMode = userData.themeDark;
+
   const navigation = useNavigation();
 
   const goToHome = () => {
@@ -35,12 +39,12 @@ export default function HeaderGame() {
 
   return (
     
-    <View style={Styles.header}>
+    <View style={[isDarkMode ? Styles.header : Styles.lightHeader]}>
       <TouchableOpacity onPress={goToHome}>
         <Icon name="close-outline" size={36} color="red" />
       </TouchableOpacity>
       <TouchableOpacity onPress={goToSettings}>
-      <Icon name="settings-outline" size={28} color="white" />
+      <Icon name="settings-outline" size={28} color={isDarkMode ? "white" : "black"} />
       </TouchableOpacity>
     </View>
   );
