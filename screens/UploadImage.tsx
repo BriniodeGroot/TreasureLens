@@ -117,7 +117,7 @@ const UploadImageScreen: React.FC = () => {
   const handleEndGame = () => {
     Alert.alert(
       'Bevestig',
-      'Zeker dat je het spel wilt beindigen?',
+      'Zeker dat je het spel wilt beëindigen?',
       [
         {
           text: 'Nee',
@@ -269,7 +269,7 @@ const UploadImageScreen: React.FC = () => {
                 onPress={handleEndGame}
                 style={[isDarkMode ? [styles.button, {backgroundColor: '#9197AE'}] : [styles.lightButton, { marginBottom: 20, backgroundColor: 'green', display: userData.host ? 'flex' : 'none' }],]}>
                   <Icon name="ban-outline" size={28} color="black" />
-                  <Text style={styles.buttonText}>Beindig het spel</Text>
+                  <Text style={styles.buttonText}>Beëindig het spel</Text>
               </TouchableOpacity>
             </View>
             <Text style={[styles.text]}>Upload hier je foto voor de opdracht</Text>

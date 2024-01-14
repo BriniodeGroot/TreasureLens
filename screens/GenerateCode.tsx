@@ -108,7 +108,7 @@ const GenerateScreen: React.FC = () => {
         onChangeText={(text) => setUsername(text)}
       />
       <TouchableOpacity onPress={generateCode} style={isDarkMode ? styles.button : styles.lightButton}>
-        <Text style={styles.buttonText}>Geneer een code</Text>
+        <Text style={styles.buttonText}>Genereer een code</Text>
       </TouchableOpacity>
       <Text style={styles.text}>{randomCode}</Text>
       <View style={styles.createCodeContainer}>

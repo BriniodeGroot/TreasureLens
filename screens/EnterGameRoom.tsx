@@ -16,6 +16,7 @@ const EnterScreen: React.FC = () => {
   const [username, setUsername] = useState('');
   const { userData, storeCode, storeUsername, storeHost } = useAppContext();
   const isDarkMode = userData.themeDark;
+  const db = getDatabase();
   
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -31,18 +32,38 @@ const EnterScreen: React.FC = () => {
         ToastAndroid.show('Vul gegevens in', ToastAndroid.SHORT);
         console.log('Vul gegevens in');
     } else {
-        let playerExists = false;
-        navigation.navigate('Game');
-        storeCode(code);
-        storeUsername(username);
-        storeHost(false);
+      let codeExists = false;
 
-        const messageDataUser = {
-          name: username,
-          value: 0, 
-        };
+      //code voor het checken van de game room code
+      const codeRef = ref(db, '/chatRooms');
+      const handleSnapshotCode = (snapshot: any) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((codeData: DataSnapshot) => {
+          console.log('Code Data:', codeData.key);
+          const codeName = codeData.key;
+          if (codeName == code) {
+            console.log('code bestaat');
+            codeExists = true;
+          }
+        });
+      }
+    }
+    const unsubscribeCode = onValue(codeRef, handleSnapshotCode);
+    
+        
+    if (codeExists) {
+      let playerExists = false;
+      navigation.navigate('Game');
+      storeCode(code);
+      storeUsername(username);
+      storeHost(false);
 
-      const db = getDatabase();
+      const messageDataUser = {
+        name: username,
+        value: 0, 
+      };
+
+      //const db = getDatabase();
       const playersRef = ref(db, 'chatRooms/' + code + '/players');
 
       const handleSnapshot = (snapshot: any) => {
@@ -74,21 +95,13 @@ const EnterScreen: React.FC = () => {
       // Unsubscribe when the component unmounts
       return () => {
         off(unsubscribe);
+        off(unsubscribeCode)
       };
-
-      // Check if the name already exists in the database.
-    //   get(playersRefChild).then((snapshot) => {
-    //   if (snapshot.exists()) {
-    //     console.log('naam bestaat al');
-    //     // The name already exists, so update the value field.
-    //     //update(playersRef.child(username), { value: 0 });
-    //   } else {
-    //     // The name does not exist, so create a new document.
-    //     push(playersRef, messageData);
-    //     console.log('naam bestaat nog niet');
-    //   }
-    // });
-    }
+    } else {
+      ToastAndroid.show('Deze code bestaat niet', ToastAndroid.SHORT);
+      console.log('Deze code bestaat niet');
+    }    
+  }
 }
 
   return (
@@ -123,3 +136,7 @@ const EnterScreen: React.FC = () => {
 };
 
 export default EnterScreen;
+function callback(arg0: boolean) {
+  throw new Error('Function not implemented.');
+}
+
