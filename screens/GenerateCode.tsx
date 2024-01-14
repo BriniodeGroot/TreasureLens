@@ -14,7 +14,7 @@ const GenerateScreen: React.FC = () => {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [randomCode, setRandomCode] = useState('******');
-  const { userData, storeCode, storeUsername, storeHost } = useAppContext();
+  const { userData, storeCode, storeUsername, storeHost, storeGameEnded } = useAppContext();
   const isDarkMode = userData.themeDark;
   
   useLayoutEffect(() => {
@@ -55,6 +55,14 @@ const GenerateScreen: React.FC = () => {
     const newMessageRefUser = push(ref(db, 'chatRooms/' + code + '/players'));
 
     set(newMessageRefUser, messageDataUser);
+
+    const messageGameEnded = {
+      value: false,
+    }
+
+    const newMessageRefGameEnded = push(ref(db, 'chatRooms/' + code + '/gameEnded'));
+
+    set(newMessageRefGameEnded, messageGameEnded);
     }
   };
 

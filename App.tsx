@@ -4,102 +4,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppProvider } from './AppContext';
 import MainNavigator from './MainNavigator';
-import Home from './screens/Home';
-import SecondScreen from './screens/SecondScreen';
-import UploadImage from './screens/UploadImage';
-import LiveChat from './screens/LiveChat';
-import GenerateCode from './screens/GenerateCode';
-import styles from './style';
-//import SystemNavigationBar from 'react-native-system-navigation-bar';
-import EnterScreen from './screens/EnterGameRoom';
-import Toast from 'react-native-toast-message';
-
-//const Stack = createNativeStackNavigator();
+import { LogBox, YellowBox } from 'react-native';
 
 const App: React.FC = () => {
+  if (!__DEV__) {
+    // In production mode
+    LogBox.ignoreLogs(['Internal React error: Attempted to capture a commit phase error inside a detached tree. This indicates a bug in React. Likely causes include deleting the same fiber more than once, committing an already-finished tree, or an inconsistent return pointer.']); // Replace with the actual warning message
+  }
+  if (__DEV__) {
+    // In production mode
+    LogBox.ignoreLogs(['Internal React error: Attempted to capture a commit phase error inside a detached tree. This indicates a bug in React. Likely causes include deleting the same fiber more than once, committing an already-finished tree, or an inconsistent return pointer.']); // Replace with the actual warning message
+  }
+  
+
   return (
     <AppProvider>
       <NavigationContainer>
-        {/* <Stack.Navigator initialRouteName="HomeScreen">
-        <Stack.Screen 
-          name="Home"
-          component={Home} 
-          options={{
-            headerStyle: {
-            backgroundColor: '#000000',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              },
-          }}
-          />
-        <Stack.Screen 
-          name="SecondScreen" 
-          component={SecondScreen} 
-          options={{
-            headerStyle: {
-            backgroundColor: '#000000',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              },
-          }}
-          />
-        <Stack.Screen 
-          name="UploadImage" 
-          component={UploadImage} 
-          options={{
-            headerStyle: {
-            backgroundColor: '#000000',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              },
-          }}
-          />
-        <Stack.Screen 
-          name="LiveChat" 
-          component={LiveChat} 
-          options={{
-            headerStyle: {
-            backgroundColor: '#000000',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              },
-          }}
-          />
-          <Stack.Screen 
-          name="GenerateCode" 
-          component={GenerateCode} 
-          options={{
-            headerStyle: {
-            backgroundColor: '#000000',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              },
-          }}
-          />
-          <Stack.Screen 
-          name="EnterScreen" 
-          component={EnterScreen} 
-          options={{
-            headerStyle: {
-            backgroundColor: '#000000',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              },
-          }}
-          />
-        </Stack.Navigator> */}
         <MainNavigator />
       </NavigationContainer>
     </AppProvider>  

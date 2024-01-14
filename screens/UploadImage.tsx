@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image, Alert, ScrollView, FlatList, Toast
 import { useNavigation } from '@react-navigation/native';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
-import { getDatabase, ref, push, off, onValue, Query, set } from 'firebase/database';
+import { getDatabase, ref, push, off, onValue, Query, set, get } from 'firebase/database';
 import { useAppContext } from '../AppContext';
 import styles from '../style';
 import HostTask from '../components/HostTask';
@@ -67,6 +67,24 @@ const UploadImageScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const db = getDatabase();
+    const chatRoomId = userData.code;
+    const chatRef: Query = ref(db, `chatRooms/${chatRoomId}/gameEnded`);
+    const handleSnapshot = (snapshot: any) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const gameEnded = data.value;
+        storeGameEnded(gameEnded);
+      }
+    }
+    const unsubscribe = onValue(chatRef, handleSnapshot);
+
+    return () => {
+      off(unsubscribe);
+    };
+  }, []);
+
+  useEffect(() => {
     if (showTopPlayers) {
       const db = getDatabase();
       const playersRef = ref(db, `chatRooms/${userData.code}/players`);
@@ -110,7 +128,16 @@ const UploadImageScreen: React.FC = () => {
           onPress: () => {
             setTabBarVisible(false);
             setShowTopPlayers(true);
-            storeGameEnded(true);
+            const db = getDatabase();
+            const gameEndedRef = ref(db, `chatRooms/${userData.code}/gameEnded`);
+            get(gameEndedRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                const gameEnded = snapshot.val()?.value;
+                if (!gameEnded) {
+                  set(gameEndedRef, { value: true });
+                }
+              }
+            });
           },
         },
       ],
