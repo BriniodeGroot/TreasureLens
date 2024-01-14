@@ -11,7 +11,7 @@ const TaskManager = () => {
     "Vind een rond object!",
     "Vind bestek!",
     "Vind een coole knuffel!",
-    "Vind sportuitrusting!",
+    "Vind een sportuitrusting!",
     "Vind een bloem!",
     "Vind de coolste steen!",
     "Vind een nuttige tool!",
@@ -71,28 +71,40 @@ const TaskManager = () => {
   };
 
   return (
-    <View style = {[isDarkMode ? styles.hostTaskContainer : styles.lightHostTaskContainer]}>
-        
-        <TextInput
-          style = {[isDarkMode ? styles.inputDark : styles.inputLight, {marginBottom: 10, marginLeft: 20}]}
-          onChangeText={(text) => setNextTask(text)}
-          value={nextTask}
-          placeholder="Typ hier je opdracht"
-          placeholderTextColor={'grey'}
-        />
-        {/* <Button onPress={handleSendTask} title="Send Task" style={styles.button}  /> */}
-        <View style={styles.hostTaskButtonsContainer}>
-          {availablePrompts.length > 0 ? (
+    <View style={[isDarkMode ? styles.hostTaskContainer : styles.lightHostTaskContainer]}>
+      {availablePrompts.length > 0 ? (
+        <React.Fragment>
+          <TextInput
+            style={[isDarkMode ? styles.inputDark : styles.inputLight, { marginBottom: 10, marginLeft: 20 }]}
+            onChangeText={(text) => setNextTask(text)}
+            value={nextTask}
+            placeholder="Typ hier je opdracht"
+            placeholderTextColor={'grey'}
+          />
+          <View style={styles.hostTaskButtonsContainer}>
             <TouchableOpacity onPress={handleSendRandomTask} style={isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary}>
               <Text style={isDarkMode ? styles.buttonText : styles.buttonText}>Random opdracht</Text>
             </TouchableOpacity>
-          ) : (
-            <Text style={styles.text}>De voorgemaakte opdrachten zijn op, wees creatief en verzin toffe opdrachten!</Text>
-          )}
-          <TouchableOpacity onPress={handleSendTask} style = {isDarkMode ? styles.button : styles.lightButton}>
-            <Text style = {isDarkMode ? styles.buttonText : styles.buttonText}>Verstuur</Text>
+            <TouchableOpacity onPress={handleSendTask} style={isDarkMode ? styles.button : styles.lightButton}>
+              <Text style={isDarkMode ? styles.buttonText : styles.buttonText}>Verstuur</Text>
+            </TouchableOpacity>
+          </View>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <Text style={styles.text}>De voorgemaakte opdrachten zijn op, wees creatief en verzin toffe opdrachten!</Text>
+          <TextInput
+            style={[isDarkMode ? styles.inputDark : styles.inputLight, { marginBottom: 10, marginLeft: 20 }]}
+            onChangeText={(text) => setNextTask(text)}
+            value={nextTask}
+            placeholder="Typ hier je opdracht"
+            placeholderTextColor={'grey'}
+          />
+          <TouchableOpacity onPress={handleSendTask} style={[isDarkMode ? styles.buttonSecondary : styles.lightButtonSecondary, {marginBottom: 10}]}>
+            <Text style={isDarkMode ? styles.buttonText : styles.buttonText}>Verstuur</Text>
           </TouchableOpacity>
-        </View>  
+        </React.Fragment>
+      )}
     </View>
   );
 };

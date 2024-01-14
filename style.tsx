@@ -23,6 +23,7 @@ const colors = {
   lightmodeTask: '#d9d8d7',
   white: '#FFFFFF',
   darkYellow: '#238fdb',
+  blueGrey: '#9197AE',
   // Add more colors as needed
 };
 
@@ -63,6 +64,8 @@ type Styles = {
   cameraContainer: any;
   hostTaskContainer: any;
   hostTaskButtonsContainer: any;
+  myMessageContainer: any;
+  myMessageText: any
   // Add more styles as needed
 };
 
@@ -302,8 +305,21 @@ const styles: Styles = StyleSheet.create({
     marginHorizontal: 10,
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
+    alignSelf: 'flex-start',
+  },
+  myMessageContainer: {
+    padding: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    backgroundColor: colors.blueGrey,
+    borderRadius: 8,
+    alignSelf: 'flex-end',
   },
   messageText: {
+    fontSize: 16,
+    color: colors.fullblack,
+  },
+  myMessageText: {
     fontSize: 16,
     color: colors.fullblack,
   },

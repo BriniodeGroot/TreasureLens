@@ -56,6 +56,7 @@ const ChatComponent = () => {
       // Construct the message data
       const messageData = {
         text: host + userData.username + ': ' + newMessage,
+        username: userData.username,
       };
 
       const timestamp = database.ServerValue.TIMESTAMP.toString();
@@ -68,27 +69,6 @@ const ChatComponent = () => {
       set(newMessageRef, messageData);
     }
 
-    // oude versie die niet werkte
-      
-    
-    //   // Specify the path to the chat messages for the given chat room
-    //   const chatPath = `chats/${chatRoomId}/messages`;
-
-    //   // Get a reference to the database at the specified path
-    //   const chatRef = database().ref(chatPath);
-    //   //chatRef.setValue(messageData);
-    //   console.log(chatRef);
-    //     chatRef
-    //     .push(messageData)
-    //     .then(() => {
-    //         console.log('Message sent successfully');
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error sending message:', error);
-    //     });
-    //   // Clear the input after sending the message
-    //   setNewMessage('');
-    // } 
     catch (error) {
       console.error('Error preparing or sending message:', error);
     }
@@ -99,13 +79,15 @@ const ChatComponent = () => {
     <View style={styles.chatContainer}>
       <FlatList
         data={messages}
-        //keyExtractor={(item) => item.timestamp.toString()}
         renderItem={({ item }) => (
-          <View style={styles.messageContainer}>
-            <Text style={styles.messageText}>{item.text}</Text>
+          <View style={item.username === userData.username ? styles.myMessageContainer : styles.messageContainer}>
+            <Text style={item.username === userData.username ? styles.myMessageText : styles.messageText}>
+              {item.text}
+            </Text>
           </View>
         )}
       />
+
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.inputChat}

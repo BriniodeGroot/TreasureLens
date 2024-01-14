@@ -69,7 +69,7 @@ const GenerateScreen: React.FC = () => {
   const startGame = () => {
     if (randomCode == '******') {
         ToastAndroid.show('Maak een code aan', ToastAndroid.SHORT);
-        console.log('Vul een username in');
+        console.log('Vul een gebruikersnaam in');
     } else {
         navigation.navigate('Game');
     }
