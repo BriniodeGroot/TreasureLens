@@ -67,7 +67,7 @@ const ScoringScreen: React.FC = () => {
         keyExtractor={(item) => item.key}
         renderItem={({ item, index }) => (
           <View>
-            <Text style={styles.textDark}>
+            <Text style={isDarkMode ? styles.textTopPLayers : styles.textTopPLayersLight}>
               {index + 1}. {item.name}: {item.score}
             </Text>
           </View>

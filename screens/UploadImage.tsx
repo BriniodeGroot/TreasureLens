@@ -75,6 +75,7 @@ const UploadImageScreen: React.FC = () => {
         const data = snapshot.val();
         const gameEnded = data.value;
         storeGameEnded(gameEnded);
+        setShowTopPlayers(true);
       }
     }
     const unsubscribe = onValue(chatRef, handleSnapshot);
@@ -248,7 +249,7 @@ const UploadImageScreen: React.FC = () => {
             keyExtractor={(item) => item.key}
             renderItem={({ item, index }) => (
               <View>
-                <Text>
+                <Text style={isDarkMode ? styles.textTopPLayers : styles.textTopPLayersLight}>
                   {index + 1}. {item.name}: {item.score}
                 </Text>
               </View>

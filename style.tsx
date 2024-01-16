@@ -65,7 +65,9 @@ type Styles = {
   hostTaskContainer: any;
   hostTaskButtonsContainer: any;
   myMessageContainer: any;
-  myMessageText: any
+  myMessageText: any;
+  textTopPLayers: any;
+  textTopPLayersLight: any;
   // Add more styles as needed
 };
 
@@ -101,6 +103,14 @@ const styles: Styles = StyleSheet.create({
   textDark: {
     color: colors.white,
     fontSize: 16,
+  },
+  textTopPLayers: {
+    color: colors.white,
+    fontSize: 24,
+  },
+  textTopPLayersLight: {
+    color: colors.fullblack,
+    fontSize: 24,
   },
   textLight: {
     color: colors.fullblack,
